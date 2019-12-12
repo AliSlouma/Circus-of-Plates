@@ -1,6 +1,6 @@
 package eg.edu.alexu.csd.oop.game.world;
 
-public class EasyLevel  {
+public class EasyLevel {
 
 
 }
