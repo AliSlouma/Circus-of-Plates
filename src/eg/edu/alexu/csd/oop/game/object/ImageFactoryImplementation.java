@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ImageFactoryImplementation implements ImageFactory {
-    private ImageFactory imageFactory = new ImageFactoryImplementation();
+    private static ImageFactory imageFactory = new ImageFactoryImplementation();
     private Map<String, BufferedImage> imageMap = new HashMap<>();
 
     // Available shapes and colors
@@ -27,8 +27,8 @@ public class ImageFactoryImplementation implements ImageFactory {
     /**
      * @return ImageFactory object (singleton).
      */
-    public ImageFactory getInstance() {
-        return this.imageFactory;
+    public static ImageFactory getInstance() {
+        return ImageFactoryImplementation.imageFactory;
     }
 
     /**
