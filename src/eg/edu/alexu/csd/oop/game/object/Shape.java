@@ -1,7 +1,6 @@
 package eg.edu.alexu.csd.oop.game.object;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.Shapes;
 
 import java.awt.image.BufferedImage;
 

@@ -1,19 +1,18 @@
 package eg.edu.alexu.csd.oop.game.world;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.Shapes;
+import eg.edu.alexu.csd.oop.game.object.Players;
+import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.World;
-import eg.edu.alexu.csd.oop.game.object.Player;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 public class WorldImp implements World {
 
-    private static int MAX_TIME = 1 * 60 * 1000;
+    private static int MAX_TIME = 60 * 1000;
     private long startTime = System.currentTimeMillis();
     private List<GameObject> movableObjects;
     private List<GameObject> constantsObjects;
@@ -22,29 +21,31 @@ public class WorldImp implements World {
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 1000;
     private ShapesPool shapesPool;
-
-    WorldImp()
+    private Players player;
+    WorldImp(Players player, LevelState level)
     {
         shapesPool = ShapesPoolImp.makeInstance();
         movableObjects = new ArrayList<>();
         controlObjects = new ArrayList<>();
         constantsObjects = new ArrayList<>();
-
+        this.player = player;
+        this.level = level;
+        controlObjects.add((GameObject) player);
     }
 
     @Override
     public List<GameObject> getConstantObjects() {
-        return getConstantObjects();
+        return constantsObjects;
     }
 
     @Override
     public List<GameObject> getMovableObjects() {
-        return getMovableObjects();
+        return movableObjects;
     }
 
     @Override
     public List<GameObject> getControlableObjects() {
-        return getControlableObjects();
+        return controlObjects;
     }
 
     @Override
@@ -103,7 +104,7 @@ public class WorldImp implements World {
     }
 
     private boolean intersect(GameObject gameObject) {
-        return false;
+        return player.intersect(gameObject);
     }
 
     private void moveToController(GameObject object) {
@@ -114,8 +115,8 @@ public class WorldImp implements World {
         if (movableObjects.size() < level.getMaxsize())
         {
             GameObject gameObject = (GameObject) shapesPool.getObject();
-            gameObject.setY(0);
-            gameObject.setX((int) Math.floor(Math.random() * MAXWIDTH));
+            gameObject.setY((int) (-90 * (Math.random()) - 10));
+            gameObject.setX((int) Math.floor(Math.random() * (MAXWIDTH - 100)));
             movableObjects.add(gameObject);
         }
     }

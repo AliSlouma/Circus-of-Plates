@@ -6,13 +6,14 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player implements GameObject {
+public class Player implements GameObject, Players {
     private static final int MAX_MSTATE = 1;
     // an array of sprite images that are drawn sequentially
     private BufferedImage[] spriteImages = new BufferedImage[MAX_MSTATE];
     private int x;
     private int y;
     private boolean visible;
+    private int top;
     public Player(int posX, int posY, String ImagePath){
         this.x = posX;
         this.y = posY;
@@ -23,6 +24,23 @@ public class Player implements GameObject {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        top = y;
+    }
+
+    @Override
+    public boolean intersect(GameObject gameObject) {
+        if (Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.35 * (gameObject.getWidth() + this.getWidth())))
+        {
+            if (Math.abs(gameObject.getHeight() + gameObject.getY() - top) < 3)
+            {
+                top += gameObject.getHeight();
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
     }
 
     @Override
@@ -68,4 +86,5 @@ public class Player implements GameObject {
     public void setVisible(boolean visible){
         this.visible = visible;
     }
+
 }
