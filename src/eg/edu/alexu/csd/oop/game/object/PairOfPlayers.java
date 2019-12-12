@@ -33,8 +33,8 @@ public class PairOfPlayers implements GameObject, Players {
     }
 
     @Override
-    public boolean intersect() {
-        return players[0].intersect() || players[1].intersect();
+    public boolean intersect(GameObject gameObject) {
+        return players[0].intersect(gameObject) || players[1].intersect(gameObject);
     }
 
     @Override

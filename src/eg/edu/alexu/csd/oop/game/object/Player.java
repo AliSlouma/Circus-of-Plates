@@ -13,6 +13,7 @@ public class Player implements GameObject, Players {
     private int x;
     private int y;
     private boolean visible;
+    private int top;
     public Player(int posX, int posY, String ImagePath){
         this.x = posX;
         this.y = posY;
@@ -23,11 +24,23 @@ public class Player implements GameObject, Players {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        top = y;
     }
 
     @Override
-    public boolean intersect() {
-        return false;
+    public boolean intersect(GameObject gameObject) {
+        if (Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.4 * (gameObject.getWidth() + this.getWidth())))
+        {
+            if (Math.abs(gameObject.getHeight() + gameObject.getY() - top) < 3)
+            {
+                top += gameObject.getHeight();
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
     }
 
     @Override
@@ -73,4 +86,5 @@ public class Player implements GameObject, Players {
     public void setVisible(boolean visible){
         this.visible = visible;
     }
+
 }
