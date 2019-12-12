@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game.world;
+package eg.edu.alexu.csd.oop.game.world.Level;
 
 public interface LevelState{
 
