@@ -1,10 +1,10 @@
 package eg.edu.alexu.csd.oop.game.world;
 
-import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.Shapes;
 
 public interface ShapesPool {
 
-    void releaseShape(GameObject gameObject);
+    void releaseShape(Shapes gameObject);
 
-    GameObject getObject();
+    Shapes getObject();
 }
