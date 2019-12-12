@@ -18,6 +18,7 @@ public class ShapesPoolImp implements ShapesPool {
     }
 
     public static ShapesPool makeInstance()
+
     {
         if (shapesPool == null)
             shapesPool = new ShapesPoolImp();
@@ -26,7 +27,8 @@ public class ShapesPoolImp implements ShapesPool {
     }
 
     @Override
-    public void releaseShape(Shapes gameObject) {
+    public void releaseShape(Shapes gameObject)
+    {
         pool.add(gameObject);
     }
 
