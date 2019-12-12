@@ -12,7 +12,7 @@ import java.util.ListIterator;
 
 public class WorldImp implements World {
 
-    private static int MAX_TIME = 1 * 60 * 1000;
+    private static int MAX_TIME = 60 * 1000;
     private long startTime = System.currentTimeMillis();
     private List<GameObject> movableObjects;
     private List<GameObject> constantsObjects;
@@ -22,28 +22,30 @@ public class WorldImp implements World {
     private final int MAXHIGHT = 1000;
     private ShapesPool shapesPool;
     private Players player;
-    WorldImp()
+    WorldImp(Players player, LevelState level)
     {
         shapesPool = ShapesPoolImp.makeInstance();
         movableObjects = new ArrayList<>();
         controlObjects = new ArrayList<>();
         constantsObjects = new ArrayList<>();
-
+        this.player = player;
+        this.level = level;
+        controlObjects.add((GameObject) player);
     }
 
     @Override
     public List<GameObject> getConstantObjects() {
-        return getConstantObjects();
+        return constantsObjects;
     }
 
     @Override
     public List<GameObject> getMovableObjects() {
-        return getMovableObjects();
+        return movableObjects;
     }
 
     @Override
     public List<GameObject> getControlableObjects() {
-        return getControlableObjects();
+        return controlObjects;
     }
 
     @Override

@@ -10,7 +10,7 @@ public class ShapesPoolImp implements ShapesPool {
 
     private static final int MAXWIDTH = 1000;
     private List<Shapes> pool;
-    public static ShapesPool shapesPool = null;
+    private static ShapesPool shapesPool = null;
 
     private ShapesPoolImp()
     {
