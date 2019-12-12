@@ -45,7 +45,7 @@ public class ShapesPoolImp implements ShapesPool {
     {
         for (int i = 0; i < SIZE; i++)
         {
-            pool.add(new Shape());
+           // pool.add(new Shape());
         }
     }
 }
