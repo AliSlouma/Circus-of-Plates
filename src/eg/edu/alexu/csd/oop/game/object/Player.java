@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player implements GameObject {
+public class Player implements GameObject, Players {
     private static final int MAX_MSTATE = 1;
     // an array of sprite images that are drawn sequentially
     private BufferedImage[] spriteImages = new BufferedImage[MAX_MSTATE];
@@ -23,6 +23,11 @@ public class Player implements GameObject {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean intersect() {
+        return false;
     }
 
     @Override
