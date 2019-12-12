@@ -1,6 +1,7 @@
 package eg.edu.alexu.csd.oop.game.world;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.object.Players;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
@@ -20,7 +21,7 @@ public class WorldImp implements World {
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 1000;
     private ShapesPool shapesPool;
-
+    private Players player;
     WorldImp()
     {
         shapesPool = ShapesPoolImp.makeInstance();
@@ -101,7 +102,7 @@ public class WorldImp implements World {
     }
 
     private boolean intersect(GameObject gameObject) {
-        return false;
+        return player.intersect(gameObject);
     }
 
     private void moveToController(GameObject object) {
@@ -112,8 +113,8 @@ public class WorldImp implements World {
         if (movableObjects.size() < level.getMaxsize())
         {
             GameObject gameObject = (GameObject) shapesPool.getObject();
-            gameObject.setY((int) (-90 * (Math.random()-10)));
-            gameObject.setX((int) Math.floor(Math.random() * MAXWIDTH));
+            gameObject.setY((int) (-90 * (Math.random()) - 10));
+            gameObject.setX((int) Math.floor(Math.random() * (MAXWIDTH - 100)));
             movableObjects.add(gameObject);
         }
     }

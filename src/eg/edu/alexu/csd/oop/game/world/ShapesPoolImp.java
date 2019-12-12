@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ShapesPoolImp implements ShapesPool {
 
+    private static final int MAXWIDTH = 1000;
     private List<Shapes> pool;
     public static ShapesPool shapesPool = null;
 
@@ -41,11 +42,11 @@ public class ShapesPoolImp implements ShapesPool {
         return pool.remove(0);
     }
 
-    private void initialize(int SIZE)
+    private void initialize(int size)
     {
-        for (int i = 0; i < SIZE; i++)
+        for (int i = 0; i < size; i++)
         {
-            pool.add(new Shape());
+            pool.add(new Shape((int) Math.floor(Math.random() * (MAXWIDTH - 100)), (int) (-90 * (Math.random()) - 10)));
         }
     }
 }
