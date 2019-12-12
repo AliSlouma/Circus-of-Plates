@@ -1,6 +1,7 @@
 package eg.edu.alexu.csd.oop.game.world;
 
 import eg.edu.alexu.csd.oop.game.Shapes;
+import eg.edu.alexu.csd.oop.game.object.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class ShapesPoolImp implements ShapesPool {
     private ShapesPoolImp()
     {
         pool = new ArrayList<>();
-        initialize();
+        initialize(20);
     }
 
     public static ShapesPool makeInstance()
@@ -33,17 +34,16 @@ public class ShapesPoolImp implements ShapesPool {
     public Shapes getObject() {
         if (pool.size() == 0)
         {
-            initialize();
+            initialize(5);
         }
-
         return pool.remove(0);
     }
 
-    private void initialize()
+    private void initialize(int SIZE)
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < SIZE; i++)
         {
-
+            pool.add(new Shape());
         }
     }
 }
