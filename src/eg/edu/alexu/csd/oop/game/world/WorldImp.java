@@ -1,13 +1,11 @@
 package eg.edu.alexu.csd.oop.game.world;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.Shapes;
+import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.World;
-import eg.edu.alexu.csd.oop.game.object.Player;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -114,7 +112,7 @@ public class WorldImp implements World {
         if (movableObjects.size() < level.getMaxsize())
         {
             GameObject gameObject = (GameObject) shapesPool.getObject();
-            gameObject.setY(0);
+            gameObject.setY((int) (-90 * (Math.random()-10)));
             gameObject.setX((int) Math.floor(Math.random() * MAXWIDTH));
             movableObjects.add(gameObject);
         }

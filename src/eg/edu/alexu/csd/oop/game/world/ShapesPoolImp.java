@@ -1,6 +1,6 @@
 package eg.edu.alexu.csd.oop.game.world;
 
-import eg.edu.alexu.csd.oop.game.Shapes;
+import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.object.Shape;
 
 import java.util.ArrayList;
