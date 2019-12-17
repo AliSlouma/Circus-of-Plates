@@ -2,32 +2,34 @@ package eg.edu.alexu.csd.oop.game.object;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class ImageFactoryImplementation implements ImageFactory {
     private static ImageFactory imageFactory = new ImageFactoryImplementation();
     private Map<String, BufferedImage> imageMap = new HashMap<>();
 
-    // Available shapes and colors
+    // Available shapes
     private List<String> availableShapes;
-    private List<String> availableColors;
 
     // Private constructor
     private ImageFactoryImplementation() {
+        File file = new File("res" + System.getProperty("file.separator") + "pieces");
+
         availableShapes = new ArrayList<>();
-        availableColors = new ArrayList<>();
-
-        availableShapes.add("rectangle");
-        availableShapes.add("square");
-
-        availableColors.add("red");
-        availableColors.add("green");
-        availableColors.add("yellow");
-        availableColors.add("blue");
+        if (file.list() != null)
+        {
+            for (String innerFile : file.list())
+            {
+                // Check if file is .png
+                if (Pattern.compile("(.*\\.png$)", Pattern.CASE_INSENSITIVE).matcher(innerFile).matches())
+                {
+                    availableShapes.add(innerFile);
+                }
+            }
+        }
     }
 
     /**
@@ -41,10 +43,7 @@ public class ImageFactoryImplementation implements ImageFactory {
      * @return a random image with random color.
      */
     public BufferedImage createImage() {
-        String name = availableShapes.get((int) (Math.random() * availableShapes.size()));
-        String color = availableColors.get((int) (Math.random() * availableColors.size()));
-
-        return this.getImage("/" + name + "-" + color + ".png");
+        return this.getImage(System.getProperty("file.separator") + "pieces" + System.getProperty("file.separator") + availableShapes.get((int) (Math.random() * availableShapes.size())));
     }
 
     /**

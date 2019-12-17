@@ -10,6 +10,6 @@ import java.awt.*;
 
 public class TestMain {
     public static void main(String[] args) {
-        GameEngine.start("title", new WorldImp(new PairOfPlayers(500, 550, "/batman.png", "/joker.png"), new HardLevel()), Color.black);
+        GameEngine.start("title", new WorldImp(new PairOfPlayers(500, 550, "/characters/batman.png", "/characters/joker.png"), new EasyLevel()), Color.black);
     }
 }
