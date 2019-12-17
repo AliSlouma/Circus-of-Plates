@@ -119,7 +119,7 @@ public class WorldImp implements World {
         if (movableObjects.size() - usedShapes < level.getMaxsize())
         {
             GameObject gameObject = (GameObject) shapesPool.getObject();
-            gameObject.setY((int) (-90 * (Math.random()) - 10));
+            gameObject.setY((int) ((-500 *Math.random()) - 10));
             gameObject.setX((int) Math.floor(Math.random() * (MAXWIDTH - 100)));
             movableObjects.add(gameObject);
         }

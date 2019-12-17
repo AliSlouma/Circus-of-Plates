@@ -46,7 +46,7 @@ public class ShapesPoolImp implements ShapesPool {
     {
         for (int i = 0; i < size; i++)
         {
-            pool.add(new Shape((int) Math.floor(Math.random() * (MAXWIDTH - 100)), (int) (-90 * (Math.random()) - 10)));
+            pool.add(new Shape((int) Math.floor(Math.random() * (MAXWIDTH - 100)), (int) ((-500 * Math.random()) - 10)));
         }
     }
 }

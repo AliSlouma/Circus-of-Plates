@@ -47,7 +47,24 @@ public class PairOfPlayers implements GameObject, Players {
 
     @Override
     public boolean intersect(GameObject gameObject) {
-        return players[0].intersect(gameObject) || players[1].intersect(gameObject);
+        if (players[0].isSameX(gameObject) && players[1].isSameX(gameObject))
+        {
+            int distance1 = Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (players[0].getX() + players[0].getWidth() / 2));
+            int distance2 = Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (players[1].getX() + players[1].getWidth() / 2));
+
+            if (distance1 < distance2)
+            {
+                return players[0].intersect(gameObject);
+            }
+            else
+            {
+                return players[1].intersect(gameObject);
+            }
+        }
+        else
+        {
+            return (players[0].intersect(gameObject) || players[1].intersect(gameObject));
+        }
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Player implements GameObject, Players {
 
     @Override
     public boolean intersect(GameObject gameObject) {
-        if (Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.5 * (gameObject.getWidth() + this.getWidth())))
+        if (!((Shape)gameObject).isused() && Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.5 * (gameObject.getWidth() + this.getWidth())))
         {
             if (Math.abs(gameObject.getHeight() + gameObject.getY() - top) <= 1)
             {
