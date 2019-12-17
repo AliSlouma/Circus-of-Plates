@@ -6,4 +6,5 @@ public interface Players {
 
     public boolean intersect(GameObject gameObject);
 
+    public void putPiece(Shapes shape);
 }

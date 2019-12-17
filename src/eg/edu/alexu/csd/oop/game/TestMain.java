@@ -7,6 +7,6 @@ import eg.edu.alexu.csd.oop.game.world.WorldImp;
 
 public class TestMain {
     public static void main(String[] args) {
-        GameEngine.start("title", new WorldImp(new PairOfPlayers(0, 800, "/batman.png", "/joker.png"), new EasyLevel()));
+        GameEngine.start("title", new WorldImp(new PairOfPlayers(500, 550, "/batman.png", "/joker.png"), new EasyLevel()));
     }
 }

@@ -11,11 +11,13 @@ public class Shape implements GameObject, Shapes {
     private int x;
     private int y;
     private boolean visible;
+    private boolean use;
 
     public Shape(int posX, int posY){
         this.x = posX;
         this.y = posY;
         this.visible = true;
+        this.use = false;
 
         // Create a buffered image
         spriteImages[0] = ImageFactoryImplementation.getInstance().createImage();
@@ -63,5 +65,15 @@ public class Shape implements GameObject, Shapes {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    @Override
+    public boolean isused() {
+        return use;
+    }
+
+    @Override
+    public void use(boolean used) {
+        this.use = used;
     }
 }

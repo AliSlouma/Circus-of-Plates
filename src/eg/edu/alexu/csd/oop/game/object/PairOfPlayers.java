@@ -70,10 +70,10 @@ public class PairOfPlayers implements GameObject, Players {
 
     @Override
     public void setY(int y) {
-        this.y = y;
+        /*this.y = y;
 
         players[0].setY(y);
-        players[1].setY(y);
+        players[1].setY(y);*/
     }
 
     @Override
