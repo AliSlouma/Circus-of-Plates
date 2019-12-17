@@ -22,6 +22,7 @@ public class WorldImp implements World {
     private final int MAXHIGHT = 1000;
     private ShapesPool shapesPool;
     private Players player;
+    private int usedShapes;
 
     public WorldImp(Players player, LevelState level)
     {
@@ -32,6 +33,7 @@ public class WorldImp implements World {
         this.player = player;
         this.level = level;
         controlObjects.add((GameObject) player);
+        usedShapes = 0;
     }
 
     @Override
@@ -71,13 +73,11 @@ public class WorldImp implements World {
         {
             GameObject object = iterable.next();
 
-            if (intersect(object))
-            {
+            if (!((Shapes)object).isused() && intersect(object)) {
                 moveToController(object);
-                iterable.remove();
             }
-            else
-            {
+
+            if (!player.putPiece(object)) {
                 object.setY(getSpeed() + object.getY());
                 if (object.getY() > MAXHIGHT) {
                     shapesPool.releaseShape((Shapes) object);
@@ -101,7 +101,7 @@ public class WorldImp implements World {
 
     @Override
     public int getControlSpeed() {
-        return 20;
+        return 10;
     }
 
     private boolean intersect(GameObject gameObject) {
@@ -109,12 +109,14 @@ public class WorldImp implements World {
     }
 
     private void moveToController(GameObject object) {
-        object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
-        controlObjects.add(object);
+        //object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
+        ((Shapes)object).use(true);
+        usedShapes++;
+        //controlObjects.add(object);
     }
 
     private void addMoreShapes() {
-        if (movableObjects.size() < level.getMaxsize())
+        if (movableObjects.size() - usedShapes < level.getMaxsize())
         {
             GameObject gameObject = (GameObject) shapesPool.getObject();
             gameObject.setY((int) (-90 * (Math.random()) - 10));
@@ -122,5 +124,4 @@ public class WorldImp implements World {
             movableObjects.add(gameObject);
         }
     }
-
 }

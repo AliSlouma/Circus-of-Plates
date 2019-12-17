@@ -44,6 +44,23 @@ public class Player implements GameObject, Players {
     }
 
     @Override
+    public boolean putPiece(GameObject shape) {
+        if (((Shape)shape).isused() && this.isSameX(shape)) {
+            shape.setX((this.getX() + this.getWidth() / 2) - shape.getWidth() / 2);
+            ((Shape)shape).use(true);
+            return true;
+        }
+        else return false;
+    }
+
+    /**
+     * @return true if shape and player intersect in x
+     */
+    public boolean isSameX(GameObject gameObject) {
+        return Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2)) <= (0.5 * (gameObject.getWidth() + this.getWidth()));
+    }
+
+    @Override
     public int getX() {
         return x;
     }
