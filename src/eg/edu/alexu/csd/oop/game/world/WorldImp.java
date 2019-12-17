@@ -108,6 +108,7 @@ public class WorldImp implements World {
     }
 
     private void moveToController(GameObject object) {
+        object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
         controlObjects.add(object);
     }
 
@@ -120,4 +121,5 @@ public class WorldImp implements World {
             movableObjects.add(gameObject);
         }
     }
+
 }
