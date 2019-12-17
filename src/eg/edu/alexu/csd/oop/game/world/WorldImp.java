@@ -22,7 +22,8 @@ public class WorldImp implements World {
     private final int MAXHIGHT = 1000;
     private ShapesPool shapesPool;
     private Players player;
-    WorldImp(Players player, LevelState level)
+
+    public WorldImp(Players player, LevelState level)
     {
         shapesPool = ShapesPoolImp.makeInstance();
         movableObjects = new ArrayList<>();

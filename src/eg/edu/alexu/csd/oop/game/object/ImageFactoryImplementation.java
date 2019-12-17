@@ -21,7 +21,13 @@ public class ImageFactoryImplementation implements ImageFactory {
         availableShapes = new ArrayList<>();
         availableColors = new ArrayList<>();
 
-        // ...
+        availableShapes.add("rectangle");
+        availableShapes.add("square");
+
+        availableColors.add("red");
+        availableColors.add("green");
+        availableColors.add("yellow");
+        availableColors.add("blue");
     }
 
     /**
@@ -38,7 +44,7 @@ public class ImageFactoryImplementation implements ImageFactory {
         String name = availableShapes.get((int) (Math.random() * availableShapes.size()));
         String color = availableColors.get((int) (Math.random() * availableColors.size()));
 
-        return this.getImage(name + "-" + color + ".png");
+        return this.getImage("/" + name + "-" + color + ".png");
     }
 
     /**
@@ -50,7 +56,7 @@ public class ImageFactoryImplementation implements ImageFactory {
             // Load image
             BufferedImage loadedImage = null;
             try {
-                loadedImage = ImageIO.read(this.getClass().getResourceAsStream("/" + name));
+                loadedImage = ImageIO.read(this.getClass().getResourceAsStream(name));
                 imageMap.put(name, loadedImage);
             }
             catch (IOException e) {
