@@ -101,7 +101,7 @@ public class WorldImp implements World {
 
     @Override
     public int getControlSpeed() {
-        return level.getVelocity();
+        return 20;
     }
 
     private boolean intersect(GameObject gameObject) {
