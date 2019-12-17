@@ -33,7 +33,7 @@ public class Player implements GameObject, Players {
         {
             if (Math.abs(gameObject.getHeight() + gameObject.getY() - top) <= 10)
             {
-                top += gameObject.getHeight();
+                top -= gameObject.getHeight();
                 return true;
             }
             else
@@ -59,8 +59,9 @@ public class Player implements GameObject, Players {
     }
 
     @Override
-    public void setY(int mY) {
-        this.y = mY;
+    public void setY(int mY)
+    {
+       // this.y = mY;
     }
 
     @Override
