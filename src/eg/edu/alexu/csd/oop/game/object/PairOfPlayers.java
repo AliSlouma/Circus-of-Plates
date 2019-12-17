@@ -52,7 +52,24 @@ public class PairOfPlayers implements GameObject, Players {
 
     @Override
     public boolean putPiece(GameObject shape) {
-       return (players[0].putPiece(shape) || players[1].putPiece(shape));
+        if (players[0].isSameX(shape) && players[1].isSameX(shape))
+        {
+            int distance1 = Math.abs((shape.getX() + shape.getWidth() / 2) - (players[0].getX() + players[0].getWidth() / 2));
+            int distance2 = Math.abs((shape.getX() + shape.getWidth() / 2) - (players[1].getX() + players[1].getWidth() / 2));
+
+            if (distance1 < distance2)
+            {
+                return players[0].putPiece(shape);
+            }
+            else
+            {
+                return players[1].putPiece(shape);
+            }
+        }
+        else
+        {
+            return (players[0].putPiece(shape) || players[1].putPiece(shape));
+        }
     }
 
     @Override

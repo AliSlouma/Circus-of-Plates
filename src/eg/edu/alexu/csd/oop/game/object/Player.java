@@ -56,7 +56,7 @@ public class Player implements GameObject, Players {
     /**
      * @return true if shape and player intersect in x
      */
-    private boolean isSameX(GameObject gameObject) {
+    public boolean isSameX(GameObject gameObject) {
         return Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2)) <= (0.5 * (gameObject.getWidth() + this.getWidth()));
     }
 
