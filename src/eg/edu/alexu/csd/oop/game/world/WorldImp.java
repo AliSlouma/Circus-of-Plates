@@ -73,15 +73,11 @@ public class WorldImp implements World {
         {
             GameObject object = iterable.next();
 
-            if (!((Shapes)object).isused() && intersect(object))
-            {
+            if (!((Shapes)object).isused() && intersect(object)) {
                 moveToController(object);
             }
-            else if (((Shapes)object).isused()) {
-                object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
-            }
-            else
-            {
+
+            if (!player.putPiece(object)) {
                 object.setY(getSpeed() + object.getY());
                 if (object.getY() > MAXHIGHT) {
                     shapesPool.releaseShape((Shapes) object);
@@ -112,12 +108,12 @@ public class WorldImp implements World {
         return player.intersect(gameObject);
     }
 
-    /*private void moveToController(GameObject object) {
-        object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
+    private void moveToController(GameObject object) {
+        //object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
         ((Shapes)object).use(true);
         usedShapes++;
         //controlObjects.add(object);
-    }*/
+    }
 
     private void addMoreShapes() {
         if (movableObjects.size() - usedShapes < level.getMaxsize())

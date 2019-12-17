@@ -45,7 +45,7 @@ public class Player implements GameObject, Players {
 
     @Override
     public boolean putPiece(GameObject shape) {
-        if (((Shape)shape).isused() || intersect(shape)) {
+        if (((Shape)shape).isused()) {
             shape.setX((this.getX() + this.getWidth() / 2) - shape.getWidth() / 2);
             ((Shape)shape).use(true);
             return true;
