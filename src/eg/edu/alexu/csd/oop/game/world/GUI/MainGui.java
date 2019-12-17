@@ -2,20 +2,17 @@ package eg.edu.alexu.csd.oop.game.world.GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class LevelPanel extends JPanel {
-
+public class MainGui extends JPanel {
     private BufferedImage image;
-    private String level;
-    public LevelPanel() {
+    public MainGui() {
         try {
-            image = ImageIO.read(new File("lego.jpg"));
+            image = ImageIO.read(new File("wa.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,41 +25,22 @@ public class LevelPanel extends JPanel {
         this.setBounds(0,0,500,700);
         this.setLayout(null);
 
-        String[] levelName = {"Easy","Medium","Hard"};
-        for(int i=0;i<3;i++){
+        String[] levelName = {"Play","Exit"};
+        for(int i=0;i<2;i++){
             JButton button = new JButton(levelName[i]);
             button.setBounds(150,150+(i*110),200,60);
-            button.setBackground(Color.YELLOW);
+            button.setBackground(Color.red);
             picLabel.add(button);
-            final int f =i;
+             int f =i;
             button.addActionListener(e -> System.out.println(levelName[f]));
-            button.setContentAreaFilled(false);
+           // button.setContentAreaFilled(false);
             button.setFont(new Font("Arial", Font.BOLD, 20));
-            button.setForeground(Color.white);
-            button.setBorder(BorderFactory.createBevelBorder(1)); // Inner Bevel Border
+            button.setForeground(Color.black);
+         //   button.setBorder(BorderFactory.createBevelBorder(1)); // Inner Bevel Border
         }
-    }
-
-    public static void main (String []args){
-
-        LevelPanel l = new LevelPanel();
-        MainGui g = new MainGui();
-        JFrame f =  new JFrame();
-
-        f.add(g);
-
-
-        f.setLayout(null);
-        f.setBounds(0, 0, 500, 700);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setTitle("Choose Level");
-
-        f.setVisible(true);
-
-
-
 
     }
 
 
 }
+
