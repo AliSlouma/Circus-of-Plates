@@ -112,12 +112,12 @@ public class WorldImp implements World {
         return player.intersect(gameObject);
     }
 
-    private void moveToController(GameObject object) {
+    /*private void moveToController(GameObject object) {
         object.setX((((GameObject)player).getX() + ((GameObject)player).getWidth() / 2) - object.getWidth() / 2);
         ((Shapes)object).use(true);
         usedShapes++;
         //controlObjects.add(object);
-    }
+    }*/
 
     private void addMoreShapes() {
         if (movableObjects.size() - usedShapes < level.getMaxsize())

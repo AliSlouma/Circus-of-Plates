@@ -51,6 +51,11 @@ public class PairOfPlayers implements GameObject, Players {
     }
 
     @Override
+    public boolean putPiece(GameObject shape) {
+       return (players[0].putPiece(shape) || players[1].putPiece(shape));
+    }
+
+    @Override
     public int getX() {
         return this.x;
     }
