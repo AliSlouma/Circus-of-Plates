@@ -3,13 +3,17 @@ package eg.edu.alexu.csd.oop.game.world.GUI;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainGui extends JPanel {
     private BufferedImage image;
+
+    ArrayList<JButton> buttons = new ArrayList<>();
     public MainGui() {
         try {
             image = ImageIO.read(new File("wa.jpg"));
@@ -28,6 +32,7 @@ public class MainGui extends JPanel {
         String[] levelName = {"Play","Exit"};
         for(int i=0;i<2;i++){
             JButton button = new JButton(levelName[i]);
+            buttons.add(button);
             button.setBounds(150,150+(i*110),200,60);
             button.setBackground(Color.red);
             picLabel.add(button);
@@ -40,7 +45,11 @@ public class MainGui extends JPanel {
         }
 
     }
+    void Listener(ActionListener listenForButton){
+        for(JButton button : buttons)
+            button.addActionListener(listenForButton);
 
+    }
 
 }
 
