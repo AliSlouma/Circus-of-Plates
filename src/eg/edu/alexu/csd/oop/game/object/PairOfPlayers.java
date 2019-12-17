@@ -2,7 +2,10 @@ package eg.edu.alexu.csd.oop.game.object;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * A pair of sprites tied together
@@ -12,7 +15,7 @@ public class PairOfPlayers implements GameObject, Players {
 
     private Player[] players = new Player[2];  // Player pair
 
-    private BufferedImage[] spriteImages = new BufferedImage[SPRITES_NUMBER];
+    private BufferedImage[] spriteImages = new BufferedImage[1];
     private int x;
     private int y;
     private boolean visible;
@@ -25,10 +28,20 @@ public class PairOfPlayers implements GameObject, Players {
         players[0] = new Player(posX, posY, img1Path);
         players[1] = new Player(posX + players[0].getWidth(), posY, img2Path);
 
-        // Set sprite images
-        for (int i = 0; i < SPRITES_NUMBER; i++)
-        {
-            spriteImages[i] = players[i].getSpriteImages()[0];
+        // Merge sprite images
+        try {
+            BufferedImage image1 = ImageIO.read(getClass().getResourceAsStream(img1Path));
+            BufferedImage image2 = ImageIO.read(getClass().getResourceAsStream(img2Path));
+
+            int width = image1.getWidth() + image2.getWidth();
+            int height = Math.max(image1.getHeight(), image2.getHeight());
+            spriteImages[0] = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+            Graphics graphics = spriteImages[0].getGraphics();
+            graphics.drawImage(image1, 0, 0, null);
+            graphics.drawImage(image2, image1.getWidth(), 0, null);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
