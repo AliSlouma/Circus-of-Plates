@@ -36,6 +36,17 @@ public class PairOfPlayers implements GameObject, Players {
         }
     }
 
+    public PairOfPlayers(int posX, int posY, BufferedImage mergedImage) {
+        this.x = posX;
+        this.y = posY;
+        this.visible = true;
+
+        this.players[0] = new Player(posX, posY, (BufferedImage) null);
+        this.players[1] = new Player(posX + players[0].getWidth(), posY, (BufferedImage) null);
+
+        this.spriteImages[0] = mergedImage;
+    }
+
     /**
      * Merge 2 buffered images
      */

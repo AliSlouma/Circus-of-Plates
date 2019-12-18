@@ -1,8 +1,7 @@
 package eg.edu.alexu.csd.oop.game.world;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.object.Players;
-import eg.edu.alexu.csd.oop.game.object.Shapes;
+import eg.edu.alexu.csd.oop.game.object.*;
 import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 
@@ -24,6 +23,8 @@ public class WorldImp implements World {
     private Players player;
     private int usedShapes;
 
+    private boolean isDead;
+
     public WorldImp(Players player, LevelState level)
     {
         shapesPool = ShapesPoolImp.makeInstance();
@@ -34,6 +35,36 @@ public class WorldImp implements World {
         this.level = level;
         controlObjects.add((GameObject) player);
         usedShapes = 0;
+    }
+
+    private WorldImp(WorldImp cloned) {
+        this.isDead = true;
+
+        this.constantsObjects = new ArrayList<>();
+        cloned.copyList(cloned.getConstantObjects(), this.constantsObjects);
+        this.controlObjects = new ArrayList<>();
+        cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
+        this.movableObjects = new ArrayList<>();
+        cloned.copyList(cloned.getMovableObjects(), this.movableObjects);
+    }
+
+    private void copyList(List<GameObject> from, List<GameObject> to) {
+        for (GameObject gameObject : from)
+        {
+            // Shape object
+            if (gameObject instanceof Shape)
+            {
+                to.add(new Shape(gameObject.getX(), gameObject.getY(), ((Shape) gameObject).isused(), gameObject.getSpriteImages()[0]));
+            }
+            else if (gameObject instanceof Player)
+            {
+                to.add(new Player(gameObject.getX(), gameObject.getY(), gameObject.getSpriteImages()[0]));
+            }
+            else if (gameObject instanceof PairOfPlayers)
+            {
+                to.add(new PairOfPlayers(gameObject.getX(), gameObject.getY(), gameObject.getSpriteImages()[0]));
+            }
+        }
     }
 
     @Override
@@ -63,30 +94,37 @@ public class WorldImp implements World {
 
     @Override
     public boolean refresh() {
-        boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
-
-        addMoreShapes();
-
-        ListIterator<GameObject> iterable = movableObjects.listIterator();
-
-        while (iterable.hasNext())
+        if (!isDead)
         {
-            GameObject object = iterable.next();
+            boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
 
-            if (!((Shapes)object).isused() && intersect(object)) {
-                moveToController(object);
-            }
+            addMoreShapes();
 
-            if (!player.putPiece(object)) {
-                object.setY(getSpeed() + object.getY());
-                if (object.getY() > MAXHIGHT) {
-                    shapesPool.releaseShape((Shapes) object);
-                    iterable.remove();
+            ListIterator<GameObject> iterable = movableObjects.listIterator();
+
+            while (iterable.hasNext())
+            {
+                GameObject object = iterable.next();
+
+                if (!((Shapes)object).isused() && intersect(object)) {
+                    moveToController(object);
+                }
+
+                if (!player.putPiece(object)) {
+                    object.setY(getSpeed() + object.getY());
+                    if (object.getY() > MAXHIGHT) {
+                        shapesPool.releaseShape((Shapes) object);
+                        iterable.remove();
+                    }
                 }
             }
+            addMoreShapes();
+            return !timeout;
         }
-        addMoreShapes();
-        return !timeout;
+        else
+        {
+            return false;
+        }
     }
 
     @Override
@@ -123,5 +161,12 @@ public class WorldImp implements World {
             gameObject.setX((int) Math.floor(Math.random() * (MAXWIDTH - 100)));
             movableObjects.add(gameObject);
         }
+    }
+
+    /**
+     * Clone world object
+     */
+    private World cloneWorld() {
+        return new WorldImp(this);
     }
 }

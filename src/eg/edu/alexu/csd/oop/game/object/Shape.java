@@ -23,6 +23,15 @@ public class Shape implements GameObject, Shapes {
         spriteImages[0] = ImageFactoryImplementation.getInstance().createImage();
     }
 
+    public Shape(int posX, int posY, boolean used, BufferedImage image) {
+        this.x = posX;
+        this.y = posY;
+        this.visible = true;
+        this.use = used;
+
+        this.spriteImages[0] = image;
+    }
+
     @Override
     public int getX() {
         return this.x;

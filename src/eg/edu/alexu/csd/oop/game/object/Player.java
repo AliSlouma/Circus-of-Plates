@@ -27,6 +27,15 @@ public class Player implements GameObject, Players {
         top = y;
     }
 
+    public Player(int posX, int posY, BufferedImage image){
+        this.x = posX;
+        this.y = posY;
+        this.visible = true;
+        this.top = y;
+
+        this.spriteImages[0] = image;
+    }
+
     @Override
     public boolean intersect(GameObject gameObject) {
         if (!((Shape)gameObject).isused() && Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.5 * (gameObject.getWidth() + this.getWidth())))
