@@ -30,19 +30,27 @@ public class PairOfPlayers implements GameObject, Players {
 
         // Merge sprite images
         try {
-            BufferedImage image1 = ImageIO.read(getClass().getResourceAsStream(img1Path));
-            BufferedImage image2 = ImageIO.read(getClass().getResourceAsStream(img2Path));
-
-            int width = image1.getWidth() + image2.getWidth();
-            int height = Math.max(image1.getHeight(), image2.getHeight());
-            spriteImages[0] = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-            Graphics graphics = spriteImages[0].getGraphics();
-            graphics.drawImage(image1, 0, 0, null);
-            graphics.drawImage(image2, image1.getWidth(), 0, null);
+            spriteImages[0] = this.mergeImages(ImageIO.read(getClass().getResourceAsStream(img1Path)), ImageIO.read(getClass().getResourceAsStream(img2Path)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Merge 2 buffered images
+     */
+    private BufferedImage mergeImages(BufferedImage image1, BufferedImage image2) {
+        BufferedImage merged;
+
+        int width = image1.getWidth() + image2.getWidth();
+        int height = Math.max(image1.getHeight(), image2.getHeight());
+        merged = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics graphics = merged.getGraphics();
+        graphics.drawImage(image1, 0, 0, null);
+        graphics.drawImage(image2, image1.getWidth(), 0, null);
+
+        return merged;
     }
 
     @Override
