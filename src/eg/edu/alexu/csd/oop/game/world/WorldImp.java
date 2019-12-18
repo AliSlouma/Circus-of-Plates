@@ -4,6 +4,9 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.object.*;
 import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
+import eg.edu.alexu.csd.oop.game.world.Level.OffLevel;
+import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoState;
+import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,5 +171,31 @@ public class WorldImp implements World {
      */
     private World cloneWorld() {
         return new WorldImp(this);
+    }
+    public class Memento{
+        private ArrayList<World> shots;
+        private MementoState state;
+        public Memento(){
+            shots=new ArrayList<>();
+        }
+        public void addWorld(World shot,Boolean timeout){
+            if(state==null) state=new MementoStateOn(this);
+            shots.add(shot);
+            state.execute(timeout);
+        }
+        public void setState(MementoState state){
+            this.state=state;
+        }
+        public ArrayList<World> getShots(){
+            return shots;
+        }
+        public void setWorld(int index){
+            World shot=shots.get(index);
+            movableObjects=shot.getMovableObjects();
+            constantsObjects=shot.getConstantObjects();
+            controlObjects=shot.getControlableObjects();
+            startTime = System.currentTimeMillis();
+            level=new OffLevel();
+        }
     }
 }
