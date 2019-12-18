@@ -43,7 +43,7 @@ public class ImageFactoryImplementation implements ImageFactory {
      * @return a random image with random color.
      */
     public BufferedImage createImage() {
-        return this.getImage(System.getProperty("file.separator") + "pieces" + System.getProperty("file.separator") + availableShapes.get((int) (Math.random() * availableShapes.size())));
+        return this.getImage(  "/pieces" + "/" + availableShapes.get((int) (Math.random() * availableShapes.size())));
     }
 
     /**
