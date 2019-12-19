@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player implements GameObject, Players, Cloneable {
+public class Player implements GameObject, Players {
     private static final int MAX_MSTATE = 1;
     // an array of sprite images that are drawn sequentially
     private BufferedImage[] spriteImages = new BufferedImage[MAX_MSTATE];
@@ -27,13 +27,13 @@ public class Player implements GameObject, Players, Cloneable {
         top = y;
     }
 
-    public Player(int posX, int posY, BufferedImage image){
-        this.x = posX;
-        this.y = posY;
+    public Player(Player player) {
+        this.x = player.getX();
+        this.y = player.getY();
         this.visible = true;
-        this.top = y;
+        this.top = this.y;
 
-        this.spriteImages[0] = image;
+        this.spriteImages[0] = player.getSpriteImages()[0];
     }
 
     @Override
@@ -112,11 +112,5 @@ public class Player implements GameObject, Players, Cloneable {
 
     public void setVisible(boolean visible){
         this.visible = visible;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        super.clone();
-        return new Player(this.x, this.y, this.spriteImages[0]);
     }
 }

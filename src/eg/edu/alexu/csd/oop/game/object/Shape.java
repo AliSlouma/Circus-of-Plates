@@ -4,7 +4,7 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 
 import java.awt.image.BufferedImage;
 
-public class Shape implements GameObject, Shapes, Cloneable {
+public class Shape implements GameObject, Shapes {
     private static final int SPRITES_NUMBER = 1;
 
     private BufferedImage[] spriteImages = new BufferedImage[SPRITES_NUMBER];
@@ -21,6 +21,15 @@ public class Shape implements GameObject, Shapes, Cloneable {
 
         // Create a buffered image
         spriteImages[0] = ImageFactoryImplementation.getInstance().createImage();
+    }
+
+    public Shape(Shape shape) {
+        this.x = shape.getX();
+        this.y = shape.getY();
+        this.visible = true;
+        this.use = shape.isused();
+
+        this.spriteImages[0] = shape.getSpriteImages()[0];
     }
 
     public Shape(int posX, int posY, boolean used, BufferedImage image) {
@@ -97,9 +106,4 @@ public class Shape implements GameObject, Shapes, Cloneable {
         return (centerColor1 == centerColor2) && (centerColor2 == centerColor3);
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        super.clone();
-        return new Shape(this.x, this.y, this.use, this.spriteImages[0]);
-    }
 }

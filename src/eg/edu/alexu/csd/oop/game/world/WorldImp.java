@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class WorldImp implements World, Cloneable {
+public class WorldImp implements World {
 
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 1000;
@@ -58,10 +58,19 @@ public class WorldImp implements World, Cloneable {
         for (GameObject gameObject : from)
         {
             // Shape object
-            try {
-                to.add();
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
+            if (gameObject instanceof Shape)
+            {
+                to.add(new Shape((Shape) gameObject));
+            }
+            // Player object
+            else if (gameObject instanceof Player)
+            {
+                to.add(new Player((Player) gameObject));
+            }
+            // Pair object
+            else if (gameObject instanceof PairOfPlayers)
+            {
+                to.add(new PairOfPlayers((PairOfPlayers) gameObject));
             }
         }
     }
@@ -96,12 +105,7 @@ public class WorldImp implements World, Cloneable {
         if (currentTime > time)
         {
             time += 10;
-
-            try {
-                memento.addWorld((WorldImp) this.clone(), timeOut);
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
+            memento.addWorld((WorldImp) this.cloneWorld(), timeOut);
         }
     }
 
@@ -182,9 +186,7 @@ public class WorldImp implements World, Cloneable {
     /**
      * Clone world object
      */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        super.clone();
+    private WorldImp cloneWorld() {
         return new WorldImp(this);
     }
 
