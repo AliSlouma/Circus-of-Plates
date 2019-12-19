@@ -1,5 +1,7 @@
 package eg.edu.alexu.csd.oop.game.world;
 
+import eg.edu.alexu.csd.oop.game.object.Decorators.BonusDecorator;
+import eg.edu.alexu.csd.oop.game.object.Decorators.EvilDecorator;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.object.Shape;
 
@@ -11,7 +13,8 @@ public class ShapesPoolImp implements ShapesPool {
     private static final int MAXWIDTH = 1000;
     private List<Shapes> pool;
     private static ShapesPool shapesPool = null;
-
+    private final double bonusProb = 0.1;
+    private final double evilProb = 0.2;
     private ShapesPoolImp()
     {
         pool = new ArrayList<>();
@@ -19,7 +22,6 @@ public class ShapesPoolImp implements ShapesPool {
     }
 
     public static ShapesPool makeInstance()
-
     {
         if (shapesPool == null)
             shapesPool = new ShapesPoolImp();
@@ -30,7 +32,7 @@ public class ShapesPoolImp implements ShapesPool {
     @Override
     public void releaseShape(Shapes gameObject)
     {
-        pool.add(gameObject);
+        pool.add((Shapes) gameObject.getShape());
     }
 
     @Override
@@ -39,7 +41,7 @@ public class ShapesPoolImp implements ShapesPool {
         {
             initialize(5);
         }
-        return pool.remove(0);
+        return calculateProb();
     }
 
     private void initialize(int size)
@@ -48,5 +50,19 @@ public class ShapesPoolImp implements ShapesPool {
         {
             pool.add(new Shape((int) Math.floor(Math.random() * (MAXWIDTH - 100)), (int) ((-500 * Math.random()) - 10)));
         }
+    }
+
+    private Shapes calculateProb()
+    {
+        double randomProb = Math.random();
+        Shapes shape = pool.remove(0);
+
+        if (randomProb <= this.bonusProb) {
+            return new BonusDecorator(shape);
+        }
+        else if (randomProb <= this.evilProb) {
+            return new EvilDecorator(shape);
+        }
+        return shape;
     }
 }

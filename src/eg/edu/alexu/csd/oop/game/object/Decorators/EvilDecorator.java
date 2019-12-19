@@ -15,7 +15,7 @@ public class EvilDecorator implements Shapes, GameObject {
     private BufferedImage image;
 
 
-    EvilDecorator(Shape gameObject)
+    public EvilDecorator(Shapes gameObject)
     {
         this.shape = gameObject;
 
@@ -99,5 +99,10 @@ public class EvilDecorator implements Shapes, GameObject {
     @Override
     public GameObject getShape() {
         return (GameObject) this.shape;
+    }
+
+    @Override
+    public GameObject getShape() {
+        return (GameObject) shape;
     }
 }
