@@ -1,7 +1,6 @@
 package eg.edu.alexu.csd.oop.game.object.Decorators;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 

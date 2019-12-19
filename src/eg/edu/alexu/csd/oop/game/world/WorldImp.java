@@ -105,7 +105,7 @@ public class WorldImp implements World {
         if (currentTime > time)
         {
             time += 10;
-            memento.addWorld((WorldImp) this.cloneWorld(), timeOut);
+            memento.addWorld(this.cloneWorld(), timeOut);
         }
     }
 
@@ -132,6 +132,7 @@ public class WorldImp implements World {
 
                 if (!player.putPiece(object)) {
                     object.setY(getSpeed() + object.getY());
+                    object.setX((int) ((level.getX_Coordinate() * Math.random() * 2)  - level.getX_Coordinate() + object.getX()));
                     if (object.getY() > MAXHIGHT) {
                         shapesPool.releaseShape((Shapes) object);
                         iterable.remove();

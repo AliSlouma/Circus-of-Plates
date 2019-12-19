@@ -15,4 +15,9 @@ public class OffLevel implements LevelState {
     public int getControllerVelocity() {
         return 0;
     }
+
+    @Override
+    public int getX_Coordinate() {
+        return 0;
+    }
 }

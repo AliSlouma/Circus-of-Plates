@@ -8,4 +8,6 @@ public interface LevelState{
 
     int getControllerVelocity();
 
+    int getX_Coordinate();
+
 }

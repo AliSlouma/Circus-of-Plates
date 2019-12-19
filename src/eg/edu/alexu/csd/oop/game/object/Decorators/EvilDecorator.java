@@ -1,7 +1,6 @@
 package eg.edu.alexu.csd.oop.game.object.Decorators;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 
@@ -11,8 +10,9 @@ import java.io.IOException;
 
 public class EvilDecorator implements Shapes, GameObject {
 
+    private static final int SPRITES_NUMBER = 1;
     private Shapes shape;
-    private BufferedImage[] spriteImages = new BufferedImage[1];
+    private BufferedImage[] spriteImages = new BufferedImage[SPRITES_NUMBER];
 
 
     public EvilDecorator(Shapes gameObject)
@@ -25,11 +25,11 @@ public class EvilDecorator implements Shapes, GameObject {
             BufferedImage loadedImage;
 
             try {
-                loadedImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
+                loadedImage = ImageIO.read(this.getClass().getResourceAsStream(imagePath));
 
-                if (HelperClass.matchingImages(loadedImage, gameObject.getShape().getSpriteImages()[0]))
+                if (HelperClass.matchingImages(loadedImage, getShape().getSpriteImages()[0]))
                 {
-                    this.spriteImages[0] = HelperClass.overlayImages(loadedImage, gameObject.getShape().getSpriteImages()[0]);
+                    this.spriteImages[0] = HelperClass.overlayImages(getShape().getSpriteImages()[0], loadedImage);
                     break;
                 }
             } catch (IOException e) {
@@ -64,7 +64,7 @@ public class EvilDecorator implements Shapes, GameObject {
 
     @Override
     public int getHeight() {
-        return this.getShape().getWidth();
+        return this.getShape().getHeight();
     }
 
     @Override
