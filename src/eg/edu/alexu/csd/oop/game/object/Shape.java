@@ -111,4 +111,8 @@ public class Shape implements GameObject, Shapes {
         return 10;
     }
 
+    @Override
+    public GameObject getShape() {
+        return this;
+    }
 }

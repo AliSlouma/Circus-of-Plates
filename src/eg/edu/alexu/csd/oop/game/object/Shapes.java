@@ -13,4 +13,6 @@ public interface Shapes {
     public boolean isSimilar(GameObject shape1, GameObject shape2, GameObject shape3);
 
     public int getScore();
+
+    public GameObject getShape();
 }
