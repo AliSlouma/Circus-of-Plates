@@ -1,6 +1,8 @@
 package eg.edu.alexu.csd.oop.game.object;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.utility.HelperClass;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,7 +31,7 @@ public class PairOfPlayers implements GameObject, Players{
 
         // Merge sprite images
         try {
-            spriteImages[0] = this.mergeImages(ImageIO.read(getClass().getResourceAsStream(img1Path)), ImageIO.read(getClass().getResourceAsStream(img2Path)));
+            spriteImages[0] = HelperClass.mergeImages(ImageIO.read(getClass().getResourceAsStream(img1Path)), ImageIO.read(getClass().getResourceAsStream(img2Path)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,23 +46,6 @@ public class PairOfPlayers implements GameObject, Players{
         this.players[1] =  new Player(pairOfPlayers.players[1]);
 
         this.spriteImages[0] = pairOfPlayers.spriteImages[0];
-    }
-
-    /**
-     * Merge 2 buffered images
-     */
-    private BufferedImage mergeImages(BufferedImage image1, BufferedImage image2) {
-        BufferedImage merged;
-
-        int width = image1.getWidth() + image2.getWidth();
-        int height = Math.max(image1.getHeight(), image2.getHeight());
-        merged = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics graphics = merged.getGraphics();
-        graphics.drawImage(image1, 0, 0, null);
-        graphics.drawImage(image2, image1.getWidth(), 0, null);
-
-        return merged;
     }
 
     @Override
