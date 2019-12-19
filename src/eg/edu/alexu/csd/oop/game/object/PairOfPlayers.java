@@ -1,7 +1,6 @@
 package eg.edu.alexu.csd.oop.game.object;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,7 +9,7 @@ import java.io.IOException;
 /**
  * A pair of sprites tied together
  */
-public class PairOfPlayers implements GameObject, Players {
+public class PairOfPlayers implements GameObject, Players{
     private static final int SPRITES_NUMBER = 2;
 
     private Player[] players = new Player[2];  // Player pair
@@ -36,15 +35,15 @@ public class PairOfPlayers implements GameObject, Players {
         }
     }
 
-    public PairOfPlayers(int posX, int posY, BufferedImage mergedImage) {
-        this.x = posX;
-        this.y = posY;
+    public PairOfPlayers(PairOfPlayers pairOfPlayers){
+        this.x = pairOfPlayers.getX();
+        this.y = pairOfPlayers.getY();
         this.visible = true;
 
-        this.players[0] = new Player(posX, posY, (BufferedImage) null);
-        this.players[1] = new Player(posX + players[0].getWidth(), posY, (BufferedImage) null);
+        this.players[0] =  new Player(pairOfPlayers.players[0]);
+        this.players[1] =  new Player(pairOfPlayers.players[1]);
 
-        this.spriteImages[0] = mergedImage;
+        this.spriteImages[0] = pairOfPlayers.spriteImages[0];
     }
 
     /**
@@ -160,4 +159,5 @@ public class PairOfPlayers implements GameObject, Players {
     public BufferedImage[] getSpriteImages() {
         return this.spriteImages;
     }
+
 }

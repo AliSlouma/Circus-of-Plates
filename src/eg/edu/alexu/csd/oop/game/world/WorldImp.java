@@ -59,7 +59,7 @@ public class WorldImp implements World, Cloneable {
         {
             // Shape object
             try {
-                to.add(gameObject.clone());
+                to.add();
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
