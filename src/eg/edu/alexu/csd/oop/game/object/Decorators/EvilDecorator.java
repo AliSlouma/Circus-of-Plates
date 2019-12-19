@@ -12,14 +12,14 @@ import java.io.IOException;
 public class EvilDecorator implements Shapes, GameObject {
 
     private Shapes shape;
-    private BufferedImage image;
+    private BufferedImage[] spriteImages = new BufferedImage[1];
 
 
     public EvilDecorator(Shapes gameObject)
     {
         this.shape = gameObject;
 
-        String[] imagePaths = {"wrappers/black-wrapper-rectangle.png", "wrappers/black-wrapper-square.png"};
+        String[] imagePaths = {"/wrappers/black-wrapper-rectangle.png", "/wrappers/black-wrapper-square.png"};
         for (String imagePath : imagePaths)
         {
             BufferedImage loadedImage;
@@ -27,9 +27,10 @@ public class EvilDecorator implements Shapes, GameObject {
             try {
                 loadedImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
 
-                if (HelperClass.matchingImages(loadedImage, gameObject.getSpriteImages()[0]))
+                if (HelperClass.matchingImages(loadedImage, gameObject.getShape().getSpriteImages()[0]))
                 {
-                    this.image = HelperClass.overlayImages(loadedImage, gameObject.getSpriteImages()[0]);
+                    this.spriteImages[0] = HelperClass.overlayImages(loadedImage, gameObject.getShape().getSpriteImages()[0]);
+                    break;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -38,42 +39,42 @@ public class EvilDecorator implements Shapes, GameObject {
     }
     @Override
     public int getX() {
-        return ((GameObject) this.shape).getX();
+        return this.getShape().getX();
     }
 
     @Override
     public void setX(int x) {
-        ((GameObject) this.shape).setX(x);
+        this.getShape().setX(x);
     }
 
     @Override
     public int getY() {
-        return ((GameObject) this.shape).getY();
+        return this.getShape().getY();
     }
 
     @Override
     public void setY(int y) {
-        ((GameObject) this.shape).setY(y);
+        this.getShape().setY(y);
     }
 
     @Override
     public int getWidth() {
-        return ((GameObject) this.shape).getWidth();
+        return this.getShape().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return ((GameObject) this.shape).getWidth();
+        return this.getShape().getWidth();
     }
 
     @Override
     public boolean isVisible() {
-        return ((GameObject) this.shape).isVisible();
+        return this.getShape().isVisible();
     }
 
     @Override
     public BufferedImage[] getSpriteImages() {
-        return new BufferedImage[]{this.image};
+        return this.spriteImages;
     }
 
     @Override
@@ -99,10 +100,5 @@ public class EvilDecorator implements Shapes, GameObject {
     @Override
     public GameObject getShape() {
         return (GameObject) this.shape;
-    }
-
-    @Override
-    public GameObject getShape() {
-        return (GameObject) shape;
     }
 }

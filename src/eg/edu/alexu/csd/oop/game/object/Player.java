@@ -38,7 +38,7 @@ public class Player implements GameObject, Players {
 
     @Override
     public boolean intersect(GameObject gameObject) {
-        if (!((Shape)gameObject).isused() && Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.5 * (gameObject.getWidth() + this.getWidth())))
+        if (!((Shapes)gameObject).isused() && Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (this.getX() + this.getWidth() / 2))  <=  (0.5 * (gameObject.getWidth() + this.getWidth())))
         {
             if (Math.abs(gameObject.getHeight() + gameObject.getY() - top) <= 1)
             {
@@ -54,9 +54,9 @@ public class Player implements GameObject, Players {
 
     @Override
     public boolean putPiece(GameObject shape) {
-        if (((Shape)shape).isused() && this.isSameX(shape)) {
+        if (((Shapes)shape).isused() && this.isSameX(shape)) {
             shape.setX((this.getX() + this.getWidth() / 2) - shape.getWidth() / 2);
-            ((Shape)shape).use(true);
+            ((Shapes)shape).use(true);
             return true;
         }
         else return false;

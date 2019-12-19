@@ -19,8 +19,8 @@ public class BonusDecorator implements Shapes, GameObject {
     public BonusDecorator(Shapes gameObject) {
         shape = gameObject;
         BonusWrappers = new String[2];
-        BonusWrappers[0] = "wrappers/gold-wrapper-rectangle.png";
-        BonusWrappers[1] = "wrappers/gold-wrapper-rectangle.png";
+        BonusWrappers[0] = "/wrappers/gold-wrapper-rectangle.png";
+        BonusWrappers[1] = "/wrappers/gold-wrapper-square.png";
         try {
             setappropirateImage();
         } catch (IOException e) {
