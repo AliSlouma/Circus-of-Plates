@@ -106,4 +106,9 @@ public class Shape implements GameObject, Shapes {
         return (centerColor1 == centerColor2) && (centerColor2 == centerColor3);
     }
 
+    @Override
+    public int getScore() {
+        return 10;
+    }
+
 }
