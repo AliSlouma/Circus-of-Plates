@@ -14,19 +14,20 @@ import java.util.ListIterator;
 
 public class WorldImp implements World {
 
+    private final int MAXWIDTH = 1000;
+    private final int MAXHIGHT = 1000;
     private static int MAX_TIME = 60 * 1000;
     private long startTime = System.currentTimeMillis();
     private List<GameObject> movableObjects;
     private List<GameObject> constantsObjects;
     private List<GameObject> controlObjects;
     private LevelState level;
-    private final int MAXWIDTH = 1000;
-    private final int MAXHIGHT = 1000;
     private ShapesPool shapesPool;
     private Players player;
     private int usedShapes;
-
     private boolean isDead;
+    private int time;
+    private Memento memento;
 
     public WorldImp(Players player, LevelState level)
     {
@@ -38,6 +39,8 @@ public class WorldImp implements World {
         this.level = level;
         controlObjects.add((GameObject) player);
         usedShapes = 0;
+        time = 5;
+        memento = new Memento();
     }
 
     private WorldImp(WorldImp cloned) {
@@ -95,12 +98,24 @@ public class WorldImp implements World {
         return MAXHIGHT;
     }
 
+    private void sendMomento (boolean timeOut, double currentTime)
+    {
+        if (currentTime > time)
+        {
+            time += 10;
+            memento.addWorld(this.cloneWorld(), timeOut);
+        }
+    }
+
     @Override
     public boolean refresh() {
         if (!isDead)
         {
-            boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
+            double currentTime = System.currentTimeMillis() - startTime;
 
+            boolean timeout = currentTime > MAX_TIME;
+
+            sendMomento(timeout, currentTime);
             addMoreShapes();
 
             ListIterator<GameObject> iterable = movableObjects.listIterator();
@@ -142,7 +157,7 @@ public class WorldImp implements World {
 
     @Override
     public int getControlSpeed() {
-        return 10;
+        return level.getControllerVelocity();
     }
 
     private boolean intersect(GameObject gameObject) {
@@ -175,7 +190,7 @@ public class WorldImp implements World {
     public class Memento{
         private ArrayList<World> shots;
         private MementoState state;
-        public Memento(){
+        Memento(){
             shots=new ArrayList<>();
         }
         public void addWorld(World shot,Boolean timeout){

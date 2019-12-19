@@ -10,4 +10,9 @@ public class OffLevel implements LevelState {
     public int getMaxsize() {
         return 0;
     }
+
+    @Override
+    public int getControllerVelocity() {
+        return 0;
+    }
 }

@@ -59,8 +59,6 @@ public class LevelPanel extends JPanel {
                 this.currentButton = button;
                 System.out.println(currentButton.getText());
             }
-
-
         }
     }
     public JButton getButton(){

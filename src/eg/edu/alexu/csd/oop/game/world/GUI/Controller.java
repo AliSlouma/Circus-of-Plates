@@ -1,9 +1,7 @@
 package eg.edu.alexu.csd.oop.game.world.GUI;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Controller {
    Model model;
@@ -13,7 +11,6 @@ public class Controller {
         this.view = view;
         this.view.mainGui.Listener(new CalculateListener());
         this.view.levelPanel.Listener(new CalculateListener());
-
     }
 
     class CalculateListener implements ActionListener{
@@ -21,7 +18,6 @@ public class Controller {
            if(!flag){
                mainListener();
                 flag = true;
-
            }
            else {
                view.levelPanel.flag=true;

@@ -1,9 +1,6 @@
 package eg.edu.alexu.csd.oop.game.world.mementoStates;
 
-import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.world.WorldImp;
-
-import java.util.ArrayList;
 
 public class MementoStateOff implements MementoState {
     private WorldImp.Memento myMemento;
@@ -22,6 +19,5 @@ public class MementoStateOff implements MementoState {
             startTime = System.currentTimeMillis();
             while (System.currentTimeMillis()-startTime  <  unitTime){ }
         }
-
     }
 }

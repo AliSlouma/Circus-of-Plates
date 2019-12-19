@@ -13,5 +13,6 @@ public class MementoStateOn implements MementoState {
             myMemento.setState(new MementoStateOff(myMemento));
             myMemento.addWorld(null,timeout);
         }
+
     }
 }

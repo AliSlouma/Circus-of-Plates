@@ -48,8 +48,6 @@ public class MainGui extends JPanel {
     void Listener(ActionListener listenForButton){
         for(JButton button : buttons)
             button.addActionListener(listenForButton);
-
     }
-
 }
 
