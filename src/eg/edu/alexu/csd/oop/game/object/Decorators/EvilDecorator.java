@@ -3,16 +3,38 @@ package eg.edu.alexu.csd.oop.game.object.Decorators;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
+import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class EvilDecorator implements Shapes, GameObject {
 
     private Shapes shape;
+    private BufferedImage image;
+
 
     EvilDecorator(Shape gameObject)
     {
-        shape = gameObject;
+        this.shape = gameObject;
+
+        String[] imagePaths = {"wrappers/black-wrapper-rectangle.png", "wrappers/black-wrapper-square.png"};
+        for (String imagePath : imagePaths)
+        {
+            BufferedImage loadedImage;
+
+            try {
+                loadedImage = ImageIO.read(getClass().getResourceAsStream(imagePath));
+
+                if (HelperClass.matchingImages(loadedImage, gameObject.getSpriteImages()[0]))
+                {
+                    this.image = HelperClass.overlayImages(loadedImage, gameObject.getSpriteImages()[0]);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
     @Override
     public int getX() {
@@ -51,7 +73,7 @@ public class EvilDecorator implements Shapes, GameObject {
 
     @Override
     public BufferedImage[] getSpriteImages() {
-        return new BufferedImage[0];
+        return new BufferedImage[]{this.image};
     }
 
     @Override
@@ -71,6 +93,11 @@ public class EvilDecorator implements Shapes, GameObject {
 
     @Override
     public int getScore() {
-        return 0;
+        return this.shape.getScore() - 50;
+    }
+
+    @Override
+    public GameObject getShape() {
+        return (GameObject) this.shape;
     }
 }
