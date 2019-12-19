@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class WorldImp implements World {
+public class WorldImp implements World, Cloneable {
 
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 1000;
@@ -58,17 +58,10 @@ public class WorldImp implements World {
         for (GameObject gameObject : from)
         {
             // Shape object
-            if (gameObject instanceof Shape)
-            {
-                to.add(new Shape(gameObject.getX(), gameObject.getY(), ((Shape) gameObject).isused(), gameObject.getSpriteImages()[0]));
-            }
-            else if (gameObject instanceof Player)
-            {
-                to.add(new Player(gameObject.getX(), gameObject.getY(), gameObject.getSpriteImages()[0]));
-            }
-            else if (gameObject instanceof PairOfPlayers)
-            {
-                to.add(new PairOfPlayers(gameObject.getX(), gameObject.getY(), gameObject.getSpriteImages()[0]));
+            try {
+                to.add(gameObject.clone());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -103,7 +96,12 @@ public class WorldImp implements World {
         if (currentTime > time)
         {
             time += 10;
-            memento.addWorld(this.cloneWorld(), timeOut);
+
+            try {
+                memento.addWorld((WorldImp) this.clone(), timeOut);
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -184,9 +182,12 @@ public class WorldImp implements World {
     /**
      * Clone world object
      */
-    private World cloneWorld() {
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        super.clone();
         return new WorldImp(this);
     }
+
     public class Memento{
         private ArrayList<World> shots;
         private MementoState state;
