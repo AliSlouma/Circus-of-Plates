@@ -10,7 +10,7 @@ public class EvilDecorator implements Shapes, GameObject {
 
     private Shapes shape;
 
-    EvilDecorator(Shape gameObject)
+    public EvilDecorator(Shapes gameObject)
     {
         shape = gameObject;
     }
@@ -72,5 +72,10 @@ public class EvilDecorator implements Shapes, GameObject {
     @Override
     public int getScore() {
         return 0;
+    }
+
+    @Override
+    public GameObject getShape() {
+        return (GameObject) shape;
     }
 }

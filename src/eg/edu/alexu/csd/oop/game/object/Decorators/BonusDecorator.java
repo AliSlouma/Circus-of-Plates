@@ -3,55 +3,72 @@ package eg.edu.alexu.csd.oop.game.object.Decorators;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
+import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class BonusDecorator implements Shapes, GameObject {
 
     private Shapes shape;
-    BonusDecorator(Shape gameObject)
-    {
+    private String[] BonusWrappers;
+    private static final int SPRITES_NUMBER = 1;
+    private BufferedImage[] spriteImages = new BufferedImage[SPRITES_NUMBER];
+
+    public BonusDecorator(Shapes gameObject) {
         shape = gameObject;
+        BonusWrappers = new String[2];
+        BonusWrappers[0] = "wrappers/gold-wrapper-rectangle.png";
+        BonusWrappers[1] = "wrappers/gold-wrapper-rectangle.png";
+        try {
+            setappropirateImage();
+        } catch (IOException e) {
+            System.out.println("Cant load the wrapped Image");
+
+        }
     }
 
     @Override
     public int getX() {
-        return ((GameObject)shape).getX();
+        return getShape().getX();
     }
 
     @Override
     public void setX(int x) {
-        ((GameObject)shape).setX(x);
+        getShape().setX(x);
     }
 
     @Override
     public int getY() {
-        return ((GameObject)shape).getY();
+        return getShape().getY();
+
     }
 
     @Override
     public void setY(int y) {
-        ((GameObject)shape).setY(y);
+        getShape().setY(y);
     }
 
     @Override
     public int getWidth() {
-        return ((GameObject)shape).getWidth();
+        return getShape().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return ((GameObject)shape).getHeight();
+        return getShape().getHeight();
     }
 
     @Override
     public boolean isVisible() {
-        return ((GameObject)shape).isVisible();
+        return getShape().isVisible();
     }
 
     @Override
     public BufferedImage[] getSpriteImages() {
-        return new BufferedImage[0].;
+
+        return spriteImages;
     }
 
     @Override
@@ -77,5 +94,17 @@ public class BonusDecorator implements Shapes, GameObject {
     @Override
     public GameObject getShape() {
         return (GameObject) shape;
+    }
+
+    private void setappropirateImage() throws IOException {
+        for (String pic : BonusWrappers)
+        {
+            BufferedImage image = ImageIO.read(this.getClass().getResourceAsStream(pic));
+            if (HelperClass.matchingImages(image, getShape().getSpriteImages()[0]))
+            {
+               spriteImages[0] = HelperClass.overlayImages(getShape().getSpriteImages()[0], image);
+               break;
+            }
+        }
     }
 }
