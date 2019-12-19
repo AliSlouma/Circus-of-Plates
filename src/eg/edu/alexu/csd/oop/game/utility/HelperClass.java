@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class HelperClass {
+    public static boolean matchingImages(BufferedImage image1, BufferedImage image2) {
+        return image1.getWidth() == image2.getWidth() && image1.getHeight() == image2.getHeight();
+    }
+
     /**
      * Merge 2 buffered images
      */
