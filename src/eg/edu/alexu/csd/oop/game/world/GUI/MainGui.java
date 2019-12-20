@@ -12,7 +12,6 @@ import java.util.Objects;
 
 public class MainGui extends JPanel {
     private BufferedImage image;
-
     ArrayList<JButton> buttons = new ArrayList<>();
     public MainGui() {
         try {
