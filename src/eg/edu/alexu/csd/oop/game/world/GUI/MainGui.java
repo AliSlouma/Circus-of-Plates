@@ -15,7 +15,7 @@ public class MainGui extends JPanel {
     ArrayList<JButton> buttons = new ArrayList<>();
     public MainGui() {
         try {
-            image = ImageIO.read(new File("wa.jpg"));
+            image = ImageIO.read(new File("res/wa.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -17,7 +17,7 @@ public class LevelPanel extends JPanel {
     ArrayList<JButton> buttons = new ArrayList<>();
     public LevelPanel() {
         try {
-            image = ImageIO.read(new File("lego.jpg"));
+            image = ImageIO.read(new File("res/lego.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

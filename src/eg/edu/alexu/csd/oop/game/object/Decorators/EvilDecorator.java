@@ -102,4 +102,9 @@ public class EvilDecorator implements Shapes, GameObject {
     public GameObject getShape() {
         return (GameObject) this.shape;
     }
+
+    @Override
+    public String toString() {
+        return "Evil decorator at x = " + this.getShape().getX() + ",y = " + this.getShape().getY();
+    }
 }

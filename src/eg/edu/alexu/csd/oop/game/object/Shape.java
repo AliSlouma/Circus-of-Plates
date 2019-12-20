@@ -105,4 +105,9 @@ public class Shape implements GameObject, Shapes, Serializable, Cloneable {
     public GameObject getShape() {
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Shape at x = " + this.x + ",y =" + this.y;
+    }
 }
