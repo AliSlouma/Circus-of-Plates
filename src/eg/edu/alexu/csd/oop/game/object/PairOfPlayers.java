@@ -1,12 +1,14 @@
 package eg.edu.alexu.csd.oop.game.object;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A pair of sprites tied together
@@ -49,7 +51,7 @@ public class PairOfPlayers implements GameObject, Players{
     }
 
     @Override
-    public boolean intersect(GameObject gameObject) {
+    public boolean intersect(GameObject gameObject, World world) {
         if (players[0].isSameX(gameObject) && players[1].isSameX(gameObject))
         {
             int distance1 = Math.abs((gameObject.getX() + gameObject.getWidth() / 2) - (players[0].getX() + players[0].getWidth() / 2));
@@ -57,16 +59,16 @@ public class PairOfPlayers implements GameObject, Players{
 
             if (distance1 < distance2)
             {
-                return players[0].intersect(gameObject);
+                return players[0].intersect(gameObject, world);
             }
             else
             {
-                return players[1].intersect(gameObject);
+                return players[1].intersect(gameObject, world);
             }
         }
         else
         {
-            return (players[0].intersect(gameObject) || players[1].intersect(gameObject));
+            return (players[0].intersect(gameObject, world) || players[1].intersect(gameObject, world));
         }
     }
 
@@ -90,6 +92,29 @@ public class PairOfPlayers implements GameObject, Players{
         {
             return (players[0].putPiece(shape) || players[1].putPiece(shape));
         }
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        List<Player> players = new ArrayList<>();
+        players.add(this.players[0]);
+        players.add(this.players[1]);
+
+        return players;
+    }
+
+    @Override
+    public int getScore() {
+        return this.players[0].getScore() + this.players[1].getScore();
+    }
+
+    @Override
+    public List<GameObject> getRemovedShapes() {
+        List<GameObject> removedShapes = new ArrayList<>();
+        removedShapes.addAll(this.players[0].getRemovedShapes());
+        removedShapes.addAll(this.players[1].getRemovedShapes());
+
+        return removedShapes;
     }
 
     @Override

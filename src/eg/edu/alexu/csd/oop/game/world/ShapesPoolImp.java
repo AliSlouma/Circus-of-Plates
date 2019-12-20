@@ -4,6 +4,7 @@ import eg.edu.alexu.csd.oop.game.object.Decorators.BonusDecorator;
 import eg.edu.alexu.csd.oop.game.object.Decorators.EvilDecorator;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.object.Shape;
+import eg.edu.alexu.csd.oop.game.utility.DynamicLink;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,13 @@ public class ShapesPoolImp implements ShapesPool {
     {
         for (int i = 0; i < size; i++)
         {
-            pool.add(new Shape((int) Math.floor(Math.random() * (MAXWIDTH - 100)), (int) ((-500 * Math.random()) - 10)));
+            try {
+                pool.add(DynamicLink.makeInstance().getShape((int) Math.floor(Math.random() * (MAXWIDTH - 100)), (int) ((-500 * Math.random()) - 10)));
+            }
+            catch (NullPointerException e)
+            {
+                System.out.println("Cant load the Jar");
+            }
         }
     }
 
