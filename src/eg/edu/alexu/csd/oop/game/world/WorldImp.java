@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class WorldImp implements World {
-
+    private final int sendMementoRate = 10;
+    private final int replayRate = 4;
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 800;
     private static int MAX_TIME = 30 * 1000;
@@ -117,7 +118,7 @@ public class WorldImp implements World {
     {
         if (currentTime > time)
         {
-            time += 3000;
+            time += sendMementoRate;
             memento.addWorld(this.cloneWorld(), timeOut);
         }
     }
@@ -156,7 +157,7 @@ public class WorldImp implements World {
             MementoTime = System.currentTimeMillis();
             return !timeout;
         }
-        else if(System.currentTimeMillis()-MementoTime >  1000)
+        else if(System.currentTimeMillis()-MementoTime >  replayRate)
         {
             memento.addWorld(null,timeout);
             MementoTime=System.currentTimeMillis();
