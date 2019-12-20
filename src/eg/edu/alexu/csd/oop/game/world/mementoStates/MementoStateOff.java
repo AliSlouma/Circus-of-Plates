@@ -15,6 +15,7 @@ public class MementoStateOff implements MementoState {
     public void execute(Boolean timeout) {
         if(worldCounter>= 0){
             WorldImp.myLogger.config("setting world "+"size = " +  size + " world counter = "+worldCounter);
+           // System.out.println(("setting world "+"size = " +  size + " world counter = "+worldCounter));
             myMemento.setWorld(worldCounter);
             worldCounter--;
         }

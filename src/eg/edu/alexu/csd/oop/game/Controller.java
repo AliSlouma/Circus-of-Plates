@@ -5,6 +5,7 @@ import eg.edu.alexu.csd.oop.game.object.PairOfPlayers;
 import eg.edu.alexu.csd.oop.game.object.Player;
 import eg.edu.alexu.csd.oop.game.object.Players;
 import eg.edu.alexu.csd.oop.game.world.GUI.View;
+import eg.edu.alexu.csd.oop.game.world.Level.EasyLevel;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelFactory;
 import eg.edu.alexu.csd.oop.game.world.WorldImp;
 
@@ -73,8 +74,35 @@ public class Controller {
         else if(s.toLowerCase().equals("hard"))
             level.setState("hard");
     }
+
     private void runGame(){
-        GameEngine.start("title", new WorldImp(this.player,level.getState()), Color.black);
+        JMenuBar  menuBar = new JMenuBar();;
+        JMenu menu = new JMenu("File");
+        JMenuItem newMenuItem = new JMenuItem("New");
+        JMenuItem pauseMenuItem = new JMenuItem("Pause");
+        JMenuItem resumeMenuItem = new JMenuItem("Resume");
+        menu.add(newMenuItem);
+        menu.addSeparator();
+        menu.add(pauseMenuItem);
+        menu.add(resumeMenuItem);
+        menuBar.add(menu);
+
+        final GameEngine.GameController gameController =   GameEngine.start("title", new WorldImp(this.player,level.getState()), menuBar, Color.white);
+        newMenuItem.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            gameController.changeWorld(new WorldImp(new PairOfPlayers(500,550,"/characters/"+imagesName[(int)(Math.random() * imagesName.length)],"/characters/"+imagesName[(int)(Math.random() * imagesName.length)]) ,new EasyLevel()));
+        }
+    });
+		pauseMenuItem.addActionListener(new ActionListener() {
+        @Override public void actionPerformed(ActionEvent e) {
+            gameController.pause();
+        }
+    });
+		resumeMenuItem.addActionListener(new ActionListener() {
+        @Override public void actionPerformed(ActionEvent e) {
+            gameController.resume();
+        }
+    });
     }
 
 

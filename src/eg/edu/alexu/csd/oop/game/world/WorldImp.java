@@ -17,8 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WorldImp implements World {
-    private final int sendMementoRate = 10;
-    private final int replayRate = 4;
+    private final int sendMementoRate = 100;
+    private final int replayRate = 30;
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 700;
 
@@ -59,11 +59,10 @@ public class WorldImp implements World {
         time = 5;
         memento = new Memento();
         System.setProperty("java.util.logging.config.file", "logging.properties");
-
+        isDead=false;
         myLogger=Logger.getLogger("worldlogger");
         myLogger.setLevel(Level.INFO);
         logTime=0;
-
         this.score = new Score(this.player);
     }
 
@@ -153,6 +152,7 @@ public class WorldImp implements World {
         boolean timeout = currentTime > MAX_TIME;
         if (!isDead)
         {
+          //  System.out.println("inside refresh not dead.");
             if(currentTime>logTime){
                 myLogger.info("controller at position X = "+getControlableObjects().get(0).getX()+" .");
                 logTime+=1000;
@@ -191,12 +191,13 @@ public class WorldImp implements World {
         }
         else if(System.currentTimeMillis()-MementoTime >  replayRate)
         {
+            //System.out.println("refresh changing frame.");
             memento.addWorld(null,timeout);
             MementoTime=System.currentTimeMillis();
 
             return true;
         }else{
-
+           // System.out.println("refresh return false.");
             return false;
         }
     }
