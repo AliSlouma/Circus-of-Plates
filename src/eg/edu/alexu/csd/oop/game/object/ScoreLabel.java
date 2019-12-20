@@ -9,8 +9,13 @@ public class ScoreLabel implements GameObject {
     private BufferedImage[] spriteImages = new BufferedImage[1];
     private int score;
 
-    public ScoreLabel() {
+    public ScoreLabel(int score) {
+        this.score = score;
         spriteImages[0] = new BufferedImage(150, 100, BufferedImage.TYPE_INT_ARGB);
+
+        // Draw on image
+        Graphics graphics = spriteImages[0].getGraphics();
+        graphics.drawString("Score: " + this.score, 0, 0);
     }
 
     @Override
@@ -46,19 +51,8 @@ public class ScoreLabel implements GameObject {
         return true;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
-
     @Override
     public BufferedImage[] getSpriteImages() {
-        Graphics graphics = spriteImages[0].getGraphics();
-        graphics.drawString("Score: " + this.score, 0, 0);
-
         return spriteImages;
     }
 }

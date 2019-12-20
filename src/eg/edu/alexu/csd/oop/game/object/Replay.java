@@ -11,7 +11,7 @@ public class Replay implements GameObject {
 
     public Replay() {
         try {
-            spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("replay-image.png"));
+            spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("/replay-image.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
