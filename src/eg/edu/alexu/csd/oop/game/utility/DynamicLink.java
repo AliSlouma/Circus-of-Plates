@@ -21,7 +21,7 @@ public class DynamicLink {
     private DynamicLink(ArrayList classes) {
         Classes = (ArrayList<Class<Shapes>>) classes;
 
-        String url = "C:\\Users\\3arrows\\IdeaProjects\\Circus-Of-Plates007";
+        String url = "lib";
         File[] files = new File(url).listFiles();
 
         if (files == null)
