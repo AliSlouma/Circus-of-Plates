@@ -76,7 +76,7 @@ public class Player implements GameObject, Players {
                             break;
                         }
 
-                        this.shapes.add(this.allShapes.get(this.allShapes.size() - 1));
+                        this.shapes.add(0, this.allShapes.get(this.allShapes.size() - 1));
                     }
                 }
 

@@ -77,6 +77,8 @@ public class WorldImp implements World {
         cloned.copyList(cloned.getConstantObjects(), this.constantsObjects);
         cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
         cloned.copyList(cloned.getMovableObjects(), this.movableObjects);
+
+
     }
 
     private void copyList(List<GameObject> from, List<GameObject> to) {
@@ -201,7 +203,7 @@ public class WorldImp implements World {
 
     @Override
     public String getStatus() {
-        return "Score=" + this.score.getScore() + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
+        return "Score = " + this.score.getScore() + "   |   Time = " + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
     }
 
     @Override
@@ -265,6 +267,11 @@ public class WorldImp implements World {
             movableObjects=shot.getMovableObjects();
             constantsObjects=shot.getConstantObjects();
             controlObjects=shot.getControlableObjects();
+
+            // Add replay and score
+            constantsObjects.add(new Replay());
+            constantsObjects.add(new ScoreLabel(score.getScore()));
+
             level=new OffLevel();
             isDead=true;
         }
