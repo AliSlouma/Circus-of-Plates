@@ -153,6 +153,10 @@ public class WorldImp implements World {
                     }
                 }
             }
+
+            // Remove matched shapes
+            this.movableObjects.removeAll(player.getRemovedShapes());
+
             addMoreShapes();
             MementoTime = System.currentTimeMillis();
             return !timeout;
@@ -171,7 +175,7 @@ public class WorldImp implements World {
 
     @Override
     public String getStatus() {
-        return "Score=" + 0 + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
+        return "Score=" + this.player.getScore() + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
     }
 
     @Override
@@ -185,7 +189,7 @@ public class WorldImp implements World {
     }
 
     private boolean intersect(GameObject gameObject) {
-        return player.intersect(gameObject);
+        return player.intersect(gameObject, this);
     }
 
     private void moveToController(GameObject object) {

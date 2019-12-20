@@ -86,11 +86,6 @@ public class BonusDecorator implements Shapes, GameObject {
     }
 
     @Override
-    public boolean isSimilar(GameObject shape1, GameObject shape2, GameObject shape3) {
-        return shape.isSimilar(shape1, shape2, shape3);
-    }
-
-    @Override
     public int getScore() {
         return 50 + shape.getScore();
     }

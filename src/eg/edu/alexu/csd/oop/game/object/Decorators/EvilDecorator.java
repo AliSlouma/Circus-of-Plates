@@ -94,11 +94,6 @@ public class EvilDecorator implements Shapes, GameObject {
     }
 
     @Override
-    public boolean isSimilar(GameObject shape1, GameObject shape2, GameObject shape3) {
-        return this.shape.isSimilar(shape1, shape2, shape3);
-    }
-
-    @Override
     public int getScore() {
         return this.shape.getScore() - 50;
     }
