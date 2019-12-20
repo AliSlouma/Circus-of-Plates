@@ -5,11 +5,15 @@ import eg.edu.alexu.csd.oop.game.object.*;
 import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.object.Decorators.BonusDecorator;
 import eg.edu.alexu.csd.oop.game.object.Decorators.EvilDecorator;
+import eg.edu.alexu.csd.oop.game.world.GUI.SimpleAudioPlayer;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 import eg.edu.alexu.csd.oop.game.world.Level.OffLevel;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoState;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -21,8 +25,7 @@ public class WorldImp implements World {
     private final int replayRate = 30;
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 700;
-
-    private static int MAX_TIME = 30 * 1000;
+    private static int MAX_TIME = 60 * 1000;
     private long startTime = System.currentTimeMillis();
 
     private List<GameObject> movableObjects;
