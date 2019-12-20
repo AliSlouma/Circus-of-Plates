@@ -3,12 +3,14 @@ package eg.edu.alexu.csd.oop.game.world;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.object.*;
 import eg.edu.alexu.csd.oop.game.World;
+import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 import eg.edu.alexu.csd.oop.game.world.Level.OffLevel;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoState;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOff;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -54,6 +56,9 @@ public class WorldImp implements World {
         cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
         this.movableObjects = new ArrayList<>();
         cloned.copyList(cloned.getMovableObjects(), this.movableObjects);
+    }
+
+    public WorldImp(PairOfPlayers pairOfPlayers, LevelState state, Color black) {
     }
 
     private void copyList(List<GameObject> from, List<GameObject> to) {

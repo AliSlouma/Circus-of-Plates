@@ -7,9 +7,8 @@ public class LevelFactory {
 
     LevelState currentState;
     Map<String ,LevelState> state ;
-    public LevelFactory(String level) {
+    public LevelFactory() {
         state = new HashMap<>();
-        getObject(level);
     }
 
     public void getObject(String level){
