@@ -3,10 +3,11 @@ package eg.edu.alexu.csd.oop.game.world;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.object.*;
 import eg.edu.alexu.csd.oop.game.World;
+import eg.edu.alexu.csd.oop.game.object.Decorators.BonusDecorator;
+import eg.edu.alexu.csd.oop.game.object.Decorators.EvilDecorator;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 import eg.edu.alexu.csd.oop.game.world.Level.OffLevel;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoState;
-import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOff;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 
 import java.util.ArrayList;
@@ -49,10 +50,11 @@ public class WorldImp implements World {
         this.isDead = true;
 
         this.constantsObjects = new ArrayList<>();
-        cloned.copyList(cloned.getConstantObjects(), this.constantsObjects);
         this.controlObjects = new ArrayList<>();
-        cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
         this.movableObjects = new ArrayList<>();
+
+        cloned.copyList(cloned.getConstantObjects(), this.constantsObjects);
+        cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
         cloned.copyList(cloned.getMovableObjects(), this.movableObjects);
     }
 
@@ -73,6 +75,15 @@ public class WorldImp implements World {
             else if (gameObject instanceof PairOfPlayers)
             {
                 to.add(new PairOfPlayers((PairOfPlayers) gameObject));
+            }
+            // Evil decorator
+            else if (gameObject instanceof EvilDecorator)
+            {
+                to.add(new EvilDecorator((EvilDecorator) gameObject));
+            }
+            else if (gameObject instanceof BonusDecorator)
+            {
+                to.add(new BonusDecorator((BonusDecorator) gameObject));
             }
         }
     }
@@ -106,7 +117,7 @@ public class WorldImp implements World {
     {
         if (currentTime > time)
         {
-            time += 10;
+            time += 1000;
             memento.addWorld(this.cloneWorld(), timeOut);
         }
     }

@@ -1,6 +1,7 @@
 package eg.edu.alexu.csd.oop.game.object.Decorators;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 
@@ -15,8 +16,7 @@ public class EvilDecorator implements Shapes, GameObject {
     private BufferedImage[] spriteImages = new BufferedImage[SPRITES_NUMBER];
 
 
-    public EvilDecorator(Shapes gameObject)
-    {
+    public EvilDecorator(Shapes gameObject) {
         this.shape = gameObject;
 
         String[] imagePaths = {"/wrappers/black-wrapper-rectangle.png", "/wrappers/black-wrapper-square.png"};
@@ -37,6 +37,12 @@ public class EvilDecorator implements Shapes, GameObject {
             }
         }
     }
+
+    public EvilDecorator(EvilDecorator evilDecorator) {
+        this.shape = new Shape((Shape) evilDecorator.getShape());
+        this.spriteImages[0] = evilDecorator.getSpriteImages()[0];
+    }
+
     @Override
     public int getX() {
         return this.getShape().getX();

@@ -13,8 +13,9 @@ public class ShapesPoolImp implements ShapesPool {
     private static final int MAXWIDTH = 1000;
     private List<Shapes> pool;
     private static ShapesPool shapesPool = null;
-    private final double bonusProb = -1;
-    private final double evilProb = 1;
+    private final double bonusProb = 0.1;
+    private final double evilProb = 0.2;
+
     private ShapesPoolImp()
     {
         pool = new ArrayList<>();
