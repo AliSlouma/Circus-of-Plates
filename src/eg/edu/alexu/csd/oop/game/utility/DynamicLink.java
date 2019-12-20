@@ -1,5 +1,6 @@
 package eg.edu.alexu.csd.oop.game.utility;
 
+import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 
 import java.io.*;
@@ -98,16 +99,17 @@ public class DynamicLink {
         try {
             Class randClass = Classes.get((int) (Math.random() * Classes.size()));
             Constructor[] cons = randClass.getDeclaredConstructors();
+            Shapes shape = null;
 
             for (int i = 0; i < cons.length; i++)
             {
-                if (cons[i].getParameterCount() == 2 && cons[i].getParameterTypes()[0].toString().equals(int.class.toString()) && cons[i].getParameterTypes()[1].toString().equals(int.class.toString()))
-                {
-                    return (Shapes) castObj(cons[i].newInstance(x, y));
+                if (cons[i].getParameterCount() == 2 && cons[i].getParameterTypes()[0].toString().equals(int.class.toString()) && cons[i].getParameterTypes()[1].toString().equals(int.class.toString())) {
+                    shape = cons[i].newInstance(x, y);
                 }
             }
+            return shape;
             throw new NullPointerException();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | IOException | ClassNotFoundException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new NullPointerException();
         }
     }
