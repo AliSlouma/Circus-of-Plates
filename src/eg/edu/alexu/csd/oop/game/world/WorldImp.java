@@ -6,6 +6,7 @@ import eg.edu.alexu.csd.oop.game.World;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 import eg.edu.alexu.csd.oop.game.world.Level.OffLevel;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoState;
+import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOff;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import java.util.ListIterator;
 public class WorldImp implements World {
 
     private final int MAXWIDTH = 1000;
-    private final int MAXHIGHT = 1000;
-    private static int MAX_TIME = 60 * 1000;
+    private final int MAXHIGHT = 800;
+    private static int MAX_TIME = 30 * 1000;
     private long startTime = System.currentTimeMillis();
     private List<GameObject> movableObjects;
     private List<GameObject> constantsObjects;
@@ -28,6 +29,7 @@ public class WorldImp implements World {
     private boolean isDead;
     private int time;
     private Memento memento;
+    private long MementoTime;
 
     public WorldImp(Players player, LevelState level)
     {
@@ -111,11 +113,11 @@ public class WorldImp implements World {
 
     @Override
     public boolean refresh() {
+        double currentTime = System.currentTimeMillis() - startTime;
+
+        boolean timeout = currentTime > MAX_TIME;
         if (!isDead)
         {
-            double currentTime = System.currentTimeMillis() - startTime;
-
-            boolean timeout = currentTime > MAX_TIME;
 
             sendMomento(timeout, currentTime);
             addMoreShapes();
@@ -140,17 +142,24 @@ public class WorldImp implements World {
                 }
             }
             addMoreShapes();
+            MementoTime = System.currentTimeMillis();
             return !timeout;
         }
-        else
+        else if(System.currentTimeMillis()-MementoTime >  2)
         {
+            memento.addWorld(null,timeout);
+            MementoTime=System.currentTimeMillis();
+
+            return true;
+        }else{
+
             return false;
         }
     }
 
     @Override
     public String getStatus() {
-        return null;
+        return "Score=" + 0 + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
     }
 
     @Override
@@ -213,7 +222,6 @@ public class WorldImp implements World {
             movableObjects=shot.getMovableObjects();
             constantsObjects=shot.getConstantObjects();
             controlObjects=shot.getControlableObjects();
-            startTime = System.currentTimeMillis();
             level=new OffLevel();
         }
     }
