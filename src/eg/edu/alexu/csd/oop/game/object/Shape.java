@@ -3,9 +3,8 @@ package eg.edu.alexu.csd.oop.game.object;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 
-public class Shape implements GameObject, Shapes, Serializable, Cloneable {
+public class Shape implements GameObject, Shapes {
     private static final int SPRITES_NUMBER = 1;
 
     private BufferedImage[] spriteImages = new BufferedImage[SPRITES_NUMBER];
