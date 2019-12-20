@@ -1,10 +1,9 @@
 package eg.edu.alexu.csd.oop.game;
 
-import eg.edu.alexu.csd.oop.game.GameEngine;
-import eg.edu.alexu.csd.oop.game.object.PairOfPlayers;
-import eg.edu.alexu.csd.oop.game.object.Player;
-import eg.edu.alexu.csd.oop.game.object.Players;
-import eg.edu.alexu.csd.oop.game.world.GUI.View;
+import eg.edu.alexu.csd.oop.game.object.controllers.PairOfPlayers;
+import eg.edu.alexu.csd.oop.game.object.controllers.Player;
+import eg.edu.alexu.csd.oop.game.object.controllers.Players;
+import eg.edu.alexu.csd.oop.game.GUI.View;
 import eg.edu.alexu.csd.oop.game.world.Level.EasyLevel;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelFactory;
 import eg.edu.alexu.csd.oop.game.world.WorldImp;
@@ -13,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 public class Controller {
    private View view;

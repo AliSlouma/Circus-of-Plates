@@ -3,7 +3,6 @@ package eg.edu.alexu.csd.oop.game.world;
 import eg.edu.alexu.csd.oop.game.object.Decorators.BonusDecorator;
 import eg.edu.alexu.csd.oop.game.object.Decorators.EvilDecorator;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
-import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.utility.DynamicLink;
 
 import java.util.ArrayList;

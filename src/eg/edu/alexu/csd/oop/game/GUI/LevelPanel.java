@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game.world.GUI;
+package eg.edu.alexu.csd.oop.game.GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,12 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainGui extends JPanel {
+public class LevelPanel extends JPanel {
+
     private BufferedImage image;
+    JButton button;
     ArrayList<JButton> buttons = new ArrayList<>();
-    public MainGui() {
+    public LevelPanel() {
         try {
-            image = ImageIO.read(new File("res/wa.jpg"));
+            image = ImageIO.read(new File("res/lego.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,22 +30,24 @@ public class MainGui extends JPanel {
         this.setBounds(0,0,500,700);
         this.setLayout(null);
 
-        String[] levelName = {"Play","Exit"};
-        for(int i=0;i<2;i++){
-            JButton button = new JButton(levelName[i]);
+        String[] levelName = {"Easy","Medium","Hard"};
+        for(int i=0;i<3;i++){
+            button = new JButton(levelName[i]);
             buttons.add(button);
             button.setBounds(150,150+(i*110),200,60);
-            button.setBackground(Color.red);
+            button.setBackground(Color.YELLOW);
             picLabel.add(button);
-
+            button.setContentAreaFilled(false);
             button.setFont(new Font("Arial", Font.BOLD, 20));
-            button.setForeground(Color.black);
+            button.setForeground(Color.white);
+            button.setBorder(BorderFactory.createBevelBorder(1)); // Inner Bevel Border
         }
-
     }
+
     public void Listener(ActionListener listenForButton){
         for(JButton button : buttons)
-            button.addActionListener(listenForButton);
-    }
-}
+                button.addActionListener(listenForButton);
 
+    }
+
+}

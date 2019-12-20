@@ -1,26 +1,25 @@
-package eg.edu.alexu.csd.oop.game.object;
+package eg.edu.alexu.csd.oop.game.object.constants;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 
-import java.awt.*;
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-public class ScoreLabel implements GameObject {
+public class Replay implements GameObject {
     private BufferedImage[] spriteImages = new BufferedImage[1];
-    private int score;
 
-    public ScoreLabel(int score) {
-        this.score = score;
-        spriteImages[0] = new BufferedImage(150, 100, BufferedImage.TYPE_INT_ARGB);
-
-        // Draw on image
-        Graphics graphics = spriteImages[0].getGraphics();
-        graphics.drawString("Score: " + this.score, 0, 0);
+    public Replay() {
+        try {
+            spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("/replay-image.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getX() {
-        return 450;
+        return 0;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class ScoreLabel implements GameObject {
 
     @Override
     public int getY() {
-        return 300;
+        return 0;
     }
 
     @Override
@@ -38,12 +37,12 @@ public class ScoreLabel implements GameObject {
 
     @Override
     public int getWidth() {
-        return spriteImages[0].getWidth();
+        return this.spriteImages[0].getWidth();
     }
 
     @Override
     public int getHeight() {
-        return spriteImages[0].getHeight();
+        return this.spriteImages[0].getHeight();
     }
 
     @Override
@@ -53,6 +52,6 @@ public class ScoreLabel implements GameObject {
 
     @Override
     public BufferedImage[] getSpriteImages() {
-        return spriteImages;
+        return this.spriteImages;
     }
 }

@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game.world.GUI;
+package eg.edu.alexu.csd.oop.game.GUI;
 
 import javax.swing.*;
 import java.awt.*;

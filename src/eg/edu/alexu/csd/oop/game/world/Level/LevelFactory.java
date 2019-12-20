@@ -1,6 +1,5 @@
 package eg.edu.alexu.csd.oop.game.world.Level;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LevelFactory {

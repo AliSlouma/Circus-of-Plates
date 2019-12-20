@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game.object;
+package eg.edu.alexu.csd.oop.game.object.controllers;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;

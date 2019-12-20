@@ -1,6 +1,6 @@
 package eg.edu.alexu.csd.oop.game.world.mementoStates;
 
-import eg.edu.alexu.csd.oop.game.world.GUI.SimpleAudioPlayer;
+import eg.edu.alexu.csd.oop.game.GUI.SimpleAudioPlayer;
 import eg.edu.alexu.csd.oop.game.world.WorldImp;
 
 import javax.sound.sampled.LineUnavailableException;

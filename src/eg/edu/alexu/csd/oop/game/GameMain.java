@@ -1,6 +1,6 @@
 package eg.edu.alexu.csd.oop.game;
 
-import eg.edu.alexu.csd.oop.game.world.GUI.View;
+import eg.edu.alexu.csd.oop.game.GUI.View;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelFactory;
 
 public class GameMain {

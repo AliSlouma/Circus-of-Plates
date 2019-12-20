@@ -1,6 +1,6 @@
 package eg.edu.alexu.csd.oop.game.world;
 
-import eg.edu.alexu.csd.oop.game.object.Players;
+import eg.edu.alexu.csd.oop.game.object.controllers.Players;
 
 public class Score {
     private Players player;

@@ -1,4 +1,4 @@
-package eg.edu.alexu.csd.oop.game.world.GUI;
+package eg.edu.alexu.csd.oop.game.GUI;
 // file using Clip Object
 import javax.sound.sampled.*;
 import java.io.File;
