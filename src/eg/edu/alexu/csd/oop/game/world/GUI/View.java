@@ -18,10 +18,4 @@ public class View extends JFrame {
         this.setVisible(true);
     }
 
-    public static void  main(String[]args){
-        View v = new View();
-        Controller c=  new Controller(v);
-
-
-    }
 }

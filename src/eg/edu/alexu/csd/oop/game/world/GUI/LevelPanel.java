@@ -15,10 +15,7 @@ import java.util.Objects;
 public class LevelPanel extends JPanel {
 
     private BufferedImage image;
-    private String level;
     JButton button;
-    JButton currentButton;
-    boolean flag = false;
     ArrayList<JButton> buttons = new ArrayList<>();
     public LevelPanel() {
         try {
@@ -42,9 +39,6 @@ public class LevelPanel extends JPanel {
             button.setBounds(150,150+(i*110),200,60);
             button.setBackground(Color.YELLOW);
             picLabel.add(button);
-            final int f =i;
-            button.addActionListener(e -> System.out.println(levelName[f]));
-
             button.setContentAreaFilled(false);
             button.setFont(new Font("Arial", Font.BOLD, 20));
             button.setForeground(Color.white);
@@ -52,20 +46,10 @@ public class LevelPanel extends JPanel {
         }
     }
 
-    void Listener(ActionListener listenForButton){
-        for(JButton button : buttons) {
-            if(!flag){
+    public void Listener(ActionListener listenForButton){
+        for(JButton button : buttons)
                 button.addActionListener(listenForButton);
-                this.currentButton = button;
-                System.out.println(currentButton.getText());
-            }
-        }
-    }
-    public JButton getButton(){
-        return this.currentButton;
+
     }
 
-    public ArrayList<JButton> getButtons() {
-        return buttons;
-    }
 }
