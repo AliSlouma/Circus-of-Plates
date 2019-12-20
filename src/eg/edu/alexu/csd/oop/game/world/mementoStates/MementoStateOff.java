@@ -8,16 +8,16 @@ public class MementoStateOff implements MementoState {
     private int size;
     public MementoStateOff(WorldImp.Memento memento){
         myMemento=memento;
-        worldCounter=0;
         size=myMemento.getShots().size();
+        worldCounter=size-2;
     }
     @Override
     public void execute(Boolean timeout) {
-        if(worldCounter< size-1){
+        if(worldCounter>= 0){
             System.out.println("setting world");
             System.out.println("size = " +  size + " world counter = "+worldCounter);
             myMemento.setWorld(worldCounter);
-            worldCounter++;
+            worldCounter--;
         }
     }
 }
