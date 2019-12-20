@@ -20,7 +20,7 @@ public class WorldImp implements World {
     private final int sendMementoRate = 10;
     private final int replayRate = 4;
     private final int MAXWIDTH = 1000;
-    private final int MAXHIGHT = 800;
+    private final int MAXHIGHT = 700;
 
     private static int MAX_TIME = 30 * 1000;
     private long startTime = System.currentTimeMillis();
