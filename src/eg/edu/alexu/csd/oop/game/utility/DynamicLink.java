@@ -16,11 +16,11 @@ import java.util.jar.JarFile;
 
 public class DynamicLink {
 
-    private ArrayList<Class<? extends Shapes>> Classes;
+    private ArrayList<Class<Shapes>> Classes;
     private static DynamicLink dynamicLink;
 
     private DynamicLink(ArrayList classes) {
-        Classes = (ArrayList<Class<? extends Shapes>>) classes;
+        Classes = (ArrayList<Class<Shapes>>) classes;
 
         String url = "C:\\Users\\3arrows\\IdeaProjects\\Circus-Of-Plates007";
         File[] files = new File(url).listFiles();
@@ -62,8 +62,8 @@ public class DynamicLink {
                 String className = je.getName().substring(0,je.getName().length()-6);
                 className = className.replace('/', '.');
                 Class loadClass = cl.loadClass(className);
-                if (checkInterfaces(loadClass.getInterfaces(), className.replaceAll("\\..*", ""))){
-                    this.Classes.add(loadClass);
+                if (checkInterfaces(loadClass.getInterfaces(),"eg.edu.alexu.csd.oop.game.object")){
+                    this.Classes.add((Class<Shapes>)loadClass);
                 }
             }
         } catch (ClassNotFoundException | IOException e) {
@@ -73,13 +73,13 @@ public class DynamicLink {
 
     private boolean checkInterfaces(Class[] interfaces, String jarName) {
 
-        ArrayList<String> requiredInterface = new ArrayList<>(Arrays.asList("GameObject", "Shapes"));
+        ArrayList<String> requiredInterface = new ArrayList<>(Arrays.asList("interface eg.edu.alexu.csd.oop.game.GameObject", "interface eg.edu.alexu.csd.oop.game.object.Shapes"));
 
         if (interfaces.length == 0) return false;
         int k = 0;
 
         for (Class anInterface : interfaces) {
-            String replace = anInterface.toString().replace( "interface "+ jarName + ".", "");
+            String replace = anInterface.toString();
             if (!requiredInterface.contains(replace)) {
                 System.out.println(replace + '\n');
                 return false;
@@ -104,11 +104,10 @@ public class DynamicLink {
             for (int i = 0; i < cons.length; i++)
             {
                 if (cons[i].getParameterCount() == 2 && cons[i].getParameterTypes()[0].toString().equals(int.class.toString()) && cons[i].getParameterTypes()[1].toString().equals(int.class.toString())) {
-                    shape = cons[i].newInstance(x, y);
+                    shape = (Shapes) cons[i].newInstance(x, y);
                 }
             }
             return shape;
-            throw new NullPointerException();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new NullPointerException();
         }
