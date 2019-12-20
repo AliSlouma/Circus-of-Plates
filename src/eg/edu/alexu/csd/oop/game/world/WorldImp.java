@@ -117,7 +117,7 @@ public class WorldImp implements World {
     {
         if (currentTime > time)
         {
-            time += 1000;
+            time += 3000;
             memento.addWorld(this.cloneWorld(), timeOut);
         }
     }
@@ -156,7 +156,7 @@ public class WorldImp implements World {
             MementoTime = System.currentTimeMillis();
             return !timeout;
         }
-        else if(System.currentTimeMillis()-MementoTime >  2)
+        else if(System.currentTimeMillis()-MementoTime >  1000)
         {
             memento.addWorld(null,timeout);
             MementoTime=System.currentTimeMillis();
@@ -234,6 +234,7 @@ public class WorldImp implements World {
             constantsObjects=shot.getConstantObjects();
             controlObjects=shot.getControlableObjects();
             level=new OffLevel();
+            isDead=true;
         }
     }
 }
