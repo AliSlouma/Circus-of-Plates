@@ -106,4 +106,9 @@ public class BonusDecorator implements Shapes, GameObject {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Bonus decorator at x = " + this.getShape().getX() + ",y = " + this.getShape().getY();
+    }
 }

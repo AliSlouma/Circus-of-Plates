@@ -15,7 +15,7 @@ public class PlayerPanel extends JPanel {
     ArrayList<JButton> buttons = new ArrayList<>();
     public PlayerPanel() {
         try {
-            image = ImageIO.read(new File("player.jpg"));
+            image = ImageIO.read(new File("res/player.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
