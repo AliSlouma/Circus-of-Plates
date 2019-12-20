@@ -21,21 +21,31 @@ public class WorldImp implements World {
     private final int replayRate = 4;
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 800;
+
     private static int MAX_TIME = 30 * 1000;
     private long startTime = System.currentTimeMillis();
+
     private List<GameObject> movableObjects;
     private List<GameObject> constantsObjects;
     private List<GameObject> controlObjects;
+
+    private Players player;
+
     private LevelState level;
     private ShapesPool shapesPool;
-    private Players player;
     private int usedShapes;
+
     private boolean isDead;
     private int time;
+
     private Memento memento;
     private long MementoTime;
+
     public static Logger myLogger;
     private int logTime;
+
+    private Score score;
+
     public WorldImp(Players player, LevelState level)
     {
         shapesPool = ShapesPoolImp.makeInstance();
@@ -49,9 +59,12 @@ public class WorldImp implements World {
         time = 5;
         memento = new Memento();
         System.setProperty("java.util.logging.config.file", "logging.properties");
+
         myLogger=Logger.getLogger("worldlogger");
         myLogger.setLevel(Level.INFO);
         logTime=0;
+
+        this.score = new Score(this.player);
     }
 
     private WorldImp(WorldImp cloned) {
@@ -188,7 +201,7 @@ public class WorldImp implements World {
 
     @Override
     public String getStatus() {
-        return "Score=" + this.player.getScore() + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
+        return "Score=" + this.score.getScore() + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis()-startTime))/1000);
     }
 
     @Override
