@@ -55,6 +55,11 @@ public class Player implements GameObject, Players {
             {
                 top -= gameObject.getHeight();
 
+                if (top < 0)
+                {
+                    this.score -= 5;
+                }
+
                 this.addToShapes((Shapes) gameObject);
                 if (HelperClass.areSimilarShapes(this.shapes))
                 {

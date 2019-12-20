@@ -8,7 +8,7 @@ public class SimpleAudioPlayer
 {
     private Clip clip;
     private AudioInputStream audioInputStream;
-    private static String filePath = "C:\\Users\\3arrows\\Desktop\\inbound1326868455320571211.wav";
+    private static String filePath = "music/song.wav";
 
     // constructor to initialize streams and clip
     public SimpleAudioPlayer()
