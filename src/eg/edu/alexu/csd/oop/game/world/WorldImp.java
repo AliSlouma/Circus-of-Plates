@@ -13,6 +13,8 @@ import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WorldImp implements World {
     private final int sendMementoRate = 10;
@@ -32,7 +34,8 @@ public class WorldImp implements World {
     private int time;
     private Memento memento;
     private long MementoTime;
-
+    public static Logger myLogger;
+    private int logTime;
     public WorldImp(Players player, LevelState level)
     {
         shapesPool = ShapesPoolImp.makeInstance();
@@ -45,6 +48,10 @@ public class WorldImp implements World {
         usedShapes = 0;
         time = 5;
         memento = new Memento();
+        System.setProperty("java.util.logging.config.file", "logging.properties");
+        myLogger=Logger.getLogger("worldlogger");
+        myLogger.setLevel(Level.INFO);
+        logTime=0;
     }
 
     private WorldImp(WorldImp cloned) {
@@ -118,6 +125,7 @@ public class WorldImp implements World {
     {
         if (currentTime > time)
         {
+            myLogger.config("new frame stored ");
             time += sendMementoRate;
             memento.addWorld(this.cloneWorld(), timeOut);
         }
@@ -130,7 +138,10 @@ public class WorldImp implements World {
         boolean timeout = currentTime > MAX_TIME;
         if (!isDead)
         {
-
+            if(currentTime>logTime){
+                myLogger.info("controller at position X = "+getControlableObjects().get(0).getX()+" .");
+                logTime+=1000;
+            }
             sendMomento(timeout, currentTime);
             addMoreShapes();
 
@@ -141,6 +152,7 @@ public class WorldImp implements World {
                 GameObject object = iterable.next();
 
                 if (!((Shapes)object).isused() && intersect(object)) {
+                    myLogger.info(((Shapes)object).toString()+" intersected and added to Controller objects");
                     moveToController(object);
                 }
 
@@ -148,6 +160,7 @@ public class WorldImp implements World {
                     object.setY(getSpeed() + object.getY());
                     object.setX((int) ((level.getX_Coordinate() * Math.random() * 2)  - level.getX_Coordinate() + object.getX()));
                     if (object.getY() > MAXHIGHT) {
+                        myLogger.info(((Shapes) object).toString()+" released and is available in the pool.");
                         shapesPool.releaseShape((Shapes) object);
                         iterable.remove();
                     }
@@ -201,6 +214,7 @@ public class WorldImp implements World {
             GameObject gameObject = (GameObject) shapesPool.getObject();
             gameObject.setY((int) ((-500 *Math.random()) - 10));
             gameObject.setX((int) Math.floor(Math.random() * (MAXWIDTH - 100)));
+            myLogger.info(gameObject.toString()+" is created and added to movable object");
             movableObjects.add(gameObject);
         }
     }
