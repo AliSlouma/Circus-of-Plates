@@ -3,20 +3,20 @@ package eg.edu.alexu.csd.oop.game.world;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.object.*;
 import eg.edu.alexu.csd.oop.game.World;
-import eg.edu.alexu.csd.oop.game.object.Shape;
+import eg.edu.alexu.csd.oop.game.object.Decorators.BonusDecorator;
+import eg.edu.alexu.csd.oop.game.object.Decorators.EvilDecorator;
 import eg.edu.alexu.csd.oop.game.world.Level.LevelState;
 import eg.edu.alexu.csd.oop.game.world.Level.OffLevel;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoState;
-import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOff;
 import eg.edu.alexu.csd.oop.game.world.mementoStates.MementoStateOn;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 public class WorldImp implements World {
-
+    private final int sendMementoRate = 10;
+    private final int replayRate = 4;
     private final int MAXWIDTH = 1000;
     private final int MAXHIGHT = 800;
     private static int MAX_TIME = 30 * 1000;
@@ -51,14 +51,12 @@ public class WorldImp implements World {
         this.isDead = true;
 
         this.constantsObjects = new ArrayList<>();
-        cloned.copyList(cloned.getConstantObjects(), this.constantsObjects);
         this.controlObjects = new ArrayList<>();
-        cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
         this.movableObjects = new ArrayList<>();
-        cloned.copyList(cloned.getMovableObjects(), this.movableObjects);
-    }
 
-    public WorldImp(PairOfPlayers pairOfPlayers, LevelState state, Color black) {
+        cloned.copyList(cloned.getConstantObjects(), this.constantsObjects);
+        cloned.copyList(cloned.getControlableObjects(), this.controlObjects);
+        cloned.copyList(cloned.getMovableObjects(), this.movableObjects);
     }
 
     private void copyList(List<GameObject> from, List<GameObject> to) {
@@ -78,6 +76,15 @@ public class WorldImp implements World {
             else if (gameObject instanceof PairOfPlayers)
             {
                 to.add(new PairOfPlayers((PairOfPlayers) gameObject));
+            }
+            // Evil decorator
+            else if (gameObject instanceof EvilDecorator)
+            {
+                to.add(new EvilDecorator((EvilDecorator) gameObject));
+            }
+            else if (gameObject instanceof BonusDecorator)
+            {
+                to.add(new BonusDecorator((BonusDecorator) gameObject));
             }
         }
     }
@@ -111,7 +118,7 @@ public class WorldImp implements World {
     {
         if (currentTime > time)
         {
-            time += 10;
+            time += sendMementoRate;
             memento.addWorld(this.cloneWorld(), timeOut);
         }
     }
@@ -150,7 +157,7 @@ public class WorldImp implements World {
             MementoTime = System.currentTimeMillis();
             return !timeout;
         }
-        else if(System.currentTimeMillis()-MementoTime >  2)
+        else if(System.currentTimeMillis()-MementoTime >  replayRate)
         {
             memento.addWorld(null,timeout);
             MementoTime=System.currentTimeMillis();
@@ -228,6 +235,7 @@ public class WorldImp implements World {
             constantsObjects=shot.getConstantObjects();
             controlObjects=shot.getControlableObjects();
             level=new OffLevel();
+            isDead=true;
         }
     }
 }

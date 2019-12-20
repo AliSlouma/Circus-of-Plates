@@ -1,6 +1,7 @@
 package eg.edu.alexu.csd.oop.game.object.Decorators;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.object.Shape;
 import eg.edu.alexu.csd.oop.game.object.Shapes;
 import eg.edu.alexu.csd.oop.game.utility.HelperClass;
 
@@ -24,8 +25,12 @@ public class BonusDecorator implements Shapes, GameObject {
             setappropirateImage();
         } catch (IOException e) {
             System.out.println("Cant load the wrapped Image");
-
         }
+    }
+
+    public BonusDecorator(BonusDecorator bonusDecorator) {
+        this.shape = new Shape((Shape) bonusDecorator.getShape());
+        spriteImages[0] = bonusDecorator.getSpriteImages()[0];
     }
 
     @Override
